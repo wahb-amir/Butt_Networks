@@ -1,75 +1,129 @@
+"use client";
 import React from "react";
-import { FaNodeJs, FaReact, FaLinux } from "react-icons/fa";
+import {
+  FaNodeJs,
+  FaReact,
+  FaPython,
+  FaLinux,
+} from "react-icons/fa";
+
 import {
   SiTailwindcss,
   SiJavascript,
   SiExpress,
   SiMongodb,
   SiNextdotjs,
-
+  SiC,
+  SiTensorflow,
+  SiReactnative,
+  SiReact,
 } from "react-icons/si";
 
-const skills = [
-
-  {
-    name: "Tailwind CSS",
-    icon: <SiTailwindcss className="text-sky-500" />,
-    desc: "Utility-first CSS framework for fast UI development.",
+const stack = [
+  { 
+    name: "JavaScript", 
+    icon: <SiJavascript className="text-yellow-400" />, 
+    progress: 70,
+    desc: "Core language for web interactivity and app logic."
   },
-  {
-    name: "JavaScript",
-    icon: <SiJavascript className="text-yellow-400" />,
-    desc: "Core programming language for interactive web apps.",
+  { 
+    name: "Tailwind CSS", 
+    icon: <SiTailwindcss className="text-sky-500" />, 
+    progress: 75,
+    desc: "Utility-first CSS framework for responsive designs."
   },
-
-  {
-    name: "Node.js",
-    icon: <FaNodeJs className="text-green-600" />,
-    desc: "JavaScript runtime for server-side development.",
+  { 
+    name: "Node.js", 
+    icon: <FaNodeJs className="text-green-600" />, 
+    progress: 80,
+    desc: "JavaScript runtime for scalable backend systems."
   },
-  {
-    name: "Express.js",
-    icon: <SiExpress className="text-gray-700" />,
-    desc: "Minimal Node.js framework for building APIs and web apps.",
+  { 
+    name: "Express.js", 
+    icon: <SiExpress className="text-gray-700" />, 
+    progress: 75,
+    desc: "Minimalist backend framework for Node.js APIs."
   },
-  {
-    name: "MongoDB",
-    icon: <SiMongodb className="text-green-700" />,
-    desc: "NoSQL database designed for flexible document storage.",
+  { 
+    name: "MongoDB", 
+    icon: <SiMongodb className="text-green-700" />, 
+    progress: 70,
+    desc: "NoSQL database for flexible and fast data storage."
   },
-  {
-    name: "React.js",
-    icon: <FaReact className="text-cyan-400" />,
-    desc: "Library for building component-based user interfaces.",
+  { 
+    name: "React.js", 
+    icon: <FaReact className="text-cyan-400" />, 
+    progress: 78,
+    desc: "Library for creating interactive UIs and components."
   },
-  {
-    name: "Next.js",
-    icon: <SiNextdotjs className="text-black" />,
-    desc: "React framework for building full-stack apps with SSR.",
+  { 
+    name: "Next.js", 
+    icon: <SiNextdotjs className="text-black" />, 
+    progress: 78,
+    desc: "React framework for SSR and full-stack apps."
   },
-  {
-    name: "Linux Hosting",
-    icon: <FaLinux className="text-gray-200" />,
-    desc: "Deploy and manage web applications on Linux servers.",
+  { 
+    name: "React Native", 
+    icon: <SiReact className="text-cyan-500" />, 
+    progress: 65,
+    desc: "Platform for apps framework for iOS and Android."
+  },
+  { 
+    name: "Python", 
+    icon: <FaPython className="text-blue-700" />, 
+    progress: 80,
+    desc: "Versatile language for web, AI, and automation."
+  },
+  { 
+    name: "Sicket-Learn (ML)", 
+    icon: <SiTensorflow className="text-orange-400" />, 
+    progress: 45,
+    desc: "Open-source library for machine learning models."
+  },
+  { 
+    name: "Linux", 
+    icon: <FaLinux className="text-gray-800 " />, 
+    progress: 70,
+    desc: "For deploying and managing applications securely."
+  },
+  { 
+    name: "C Language", 
+    icon: <SiC className="text-blue-800" />, 
+    progress: 60,
+    desc: "Low-level language for system and performance apps."
   },
 ];
 
 const Skills = () => {
   return (
-    <section className="Skills py-10 px-5" id="skills">
-      <h2 className="text-4xl font-bold font-gray-900 text-center mb-10 flex items-center justify-center gap-3">
-        <span role="img" aria-label="briefcase">💼</span> Our Stack
-      </h2>
+    <section className="Skills py-10 px-5 mt-20 bg-transparent" id="skills">
+      <h1 className="text-4xl font-bold text-center mb-10 flex items-center justify-center gap-3 text-gray-800">
+        <span role="img" aria-label="briefcase">
+          💼
+        </span>
+        Tech Stack
+      </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 cursor-pointer gap-6 max-w-6xl mx-auto">
-        {skills.map((skill, index) => (
+      <div className="flex flex-wrap justify-center items-center gap-6 max-w-6xl mx-auto">
+        {stack.map((item, index) => (
           <div
             key={index}
-            className="SkillsBox transition-scale hover:scale-[1.03] bg-gray-400 shadow-xl rounded-xl p-6 flex flex-col items-center gap-3 text-center hover:shadow-2xl transition duration-300"
+            className="SkillsBox bg-gray-100 shadow-lg rounded-xl p-6 flex flex-col items-center gap-3 transition-transform duration-300 hover:scale-105 cursor-pointer w-60"
           >
-            <div className="text-4xl">{skill.icon}</div>
-            <h3 className="text-xl font-semibold">{skill.name}</h3>
-            <p className="text-sm text-gray-800 SkillsP">{skill.desc}</p>
+            <div className="text-5xl">{item.icon}</div>
+            <p className="text-xl font-semibold text-gray-900">{item.name}</p>
+            <p className="text-sm text-gray-600 text-center">{item.desc}</p>
+
+            {/* Progress bar */}
+            <div className="w-full bg-gray-200 rounded-full h-3 mt-2 relative overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full transition-all duration-700"
+                style={{ width: `${item.progress}%` }}
+              />
+              <span className="absolute inset-0 flex justify-center items-center text-xs font-semibold text-white">
+                {item.progress}%
+              </span>
+            </div>
           </div>
         ))}
       </div>

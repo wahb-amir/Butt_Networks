@@ -1,104 +1,94 @@
-"use client"; // add this at the top if you want this component to be client-side
+"use client";
+import React, { useEffect, useRef, useState } from "react";
+import Link from 'next/link';
+import { ArrowRight } from "lucide-react";
 
-import React from 'react';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-
-const containerVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.2,
-    },
+const projects = [
+  {
+    Heading: "Blog Website",
+    Text: "A modern blog platform built with Next.js and Tailwind CSS. Features dynamic routing, SEO optimization, and a fully responsive UI.",
+    demoLink: "https://devblogs.buttnetworks.com/",
   },
-};
+  {
+    Heading: "Business Website",
+    Text: "A professional business website with features like Dark-Mode and Contact Form built using Next, Node.js, Express, and MongoDB for full-stack functionality.",
+    demoLink: "https://buttnetworks.com/",
+  },
+  {
+    Heading: "E-Commerce Store",
+    Text: "An interactive e-comerce application with multiple categories, Built with Next and Node.js and have proper auth-system with proper database.",
+    demoLink: "https://boltform.buttnetworks.com/",
+  },
+];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-};
+const Projects = () => {
+  const sectionRef = useRef(null);
+  const [visible, setVisible] = useState(false);
 
-export const Projects = () => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setVisible(true);
+          observer.disconnect(); // 👈 animate once
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
+  }, []);
+
   return (
-    <section id="projects" className="mt-20 mb-10 cursor-pointer px-4">
-      <h1 className="ProjectsP text-center text-4xl font-extrabold mb-10 mr-5">
-        🚀Our Projects
-      </h1>
-
-      <motion.div
-        className="flex flex-col md:flex-row md:justify-center md:gap-6 max-w-6xl mx-auto items-stretch"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
+    <section ref={sectionRef} className="Projects mt-20 px-4 md:px-16 mb-5" id="projects">
+      <h1
+        className={`text-center font-extrabold text-[35px] text-gray-800 mb-10 transition-opacity duration-700 ${
+          visible ? "animate-fadeIn" : "opacity-0"
+        }`}
       >
-        <motion.div
-          className="Projects max-w-md bg-gray-400 rounded-xl shadow-lg h-auto overflow-hidden transition hover:shadow-2xl flex flex-col"
-          variants={cardVariants}
-          whileHover={{ scale: 1.03 }}
-        >
-          <Image
-            src="/project.png"
-            alt="Project Banner"
-            width={300}
-            height={300}
-            className="w-full h-auto object-cover"
-          />
-
-          <div className="p-5 text-center flex-grow">
-            <h3 className="text-xl font-bold text-gray-800">BoltForm</h3>
-            <p className="mt-2 text-sm font-semibold text-gray-700">
-              A modern responsive e-commerce store built with Next.js, Tailwind,
-              and MongoDB.
-            </p>
-          </div>
-          <a
-            href="https://boltform.buttnetworks.com/"
-            target="_blank"
-            rel="noreferrer"
+      Projects
+      </h1>
+      <div className="flex justify-center items-center flex-wrap cursor-pointer gap-8">
+        {projects.map((project, index) => (
+          <div
+            key={index}
+            className={`Projects-Container w-full sm:w-[300px] md:w-[350px] bg-gray-100 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 p-6 flex flex-col justify-between opacity-0 ${
+              visible ? "animate-fadeUp" : ""
+            }`}
+            style={{
+              animationDelay: visible ? `${index * 0.2}s` : "0s",
+              animationFillMode: "forwards",
+            }}
           >
-            <button
-              className="button px-6 py-3 bg-gradient-to-r from-gray-800 to-gray-900 
-              text-white font-semibold block m-auto rounded-xl mb-3 shadow-lg hover:shadow-2xl hover:scale-105 transition"
-            >
-              Live Demo
-            </button>
-          </a>
-        </motion.div>
-
-        <motion.div
-          className="Projects max-w-md mt-5 md:mt-0 bg-gray-400 rounded-xl shadow-lg h-auto overflow-hidden transition hover:shadow-2xl flex flex-col"
-          variants={cardVariants}
-          whileHover={{ scale: 1.03 }}
-        >
-          <Image
-            src="/project-2.png"
-            alt="Project Banner"
-            width={1000}
-            height={1000}
-            className="w-full h-auto object-cover"
-          />
-
-          <div className="p-5 text-center flex-grow">
-            <h3 className="text-xl  font-bold text-gray-800">Get-a-Developer</h3>
-            <p className="mt-2 text-sm font-semibold text-gray-700">
-              A modern responsive online website built with Next.js, Tailwind, and
-              MongoDB.
+            <h2 className="font-bold text-2xl mb-4 text-gray-900 transition-colors duration-300 hover:text-gray-700">
+              {project.Heading}
+            </h2>
+            <p className="text-gray-700 mb-4 transition-opacity duration-300 hover:opacity-80">
+              {project.Text}
             </p>
+            <div className="mt-auto">
+              <a
+                href={project.demoLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 bg-gradient-to-r from-gray-600 to-gray-800 px-5 py-2 rounded-[6px] text-white cursor-pointer font-bold hover:scale-105 transform transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+              >
+                Live Demo
+              </a>
+            </div>
           </div>
-          <a
-            href="https://get-a-developer.buttnetworks.com/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <button
-              className="button px-6 py-3 bg-gradient-to-r from-gray-800 to-gray-900 
-              text-white font-semibold block m-auto rounded-xl shadow-lg mb-3 hover:shadow-2xl hover:scale-105 transition"
-            >
-              Live Demo
-            </button>
-          </a>
-        </motion.div>
-      </motion.div>
+        ))}
+        <Link href='/Projects'>
+        <button className="mt-4 bg-gradient-to-r from-gray-600 to-gray-800 px-5 py-2 rounded-[6px] text-white cursor-pointer font-bold hover:scale-105 transform transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+        >View More Projets</button>
+        </Link>
+      </div>
     </section>
   );
 };

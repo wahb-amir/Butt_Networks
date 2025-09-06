@@ -6,7 +6,7 @@ html{
 
 body{
   transition: 0.3s background;
-  @apply bg-gray-300
+  @apply bg-gray-100
 }
 
 ::placeholder{
@@ -51,19 +51,27 @@ body.dark-mode .Skills{
   @apply text-white
 }
 
+body.dark-mode .Skills h1{
+  @apply text-white
+}
+
 body.dark-mode .SkillsBox{
   @apply bg-gray-800/50
 }
 
-body.dark-mode .SkillsP{
+body.dark-mode .Skills p{
   @apply text-white 
 }
 
-body.dark-mode .Projects{
+body.dark-mode .Projects-Container{
   @apply bg-gray-800/50
 }
 
-body.dark-mode .Projects h3{
+body.dark-mode .Projects h1{
+  @apply text-white
+}
+
+body.dark-mode .Projects h2{
   @apply text-white
 }
 
@@ -95,6 +103,35 @@ body.dark-mode .Footer{
   @apply bg-gray-800/50
 }
 
+body.dark-mode .Offer{
+  @apply text-white
+}
+
+body.dark-mode .Offer p{
+  @apply text-gray-400
+}
+
+body.dark-mode .Collaboration{
+  @apply text-white
+}
+
+body.dark-mode .Collaboration p{
+  @apply text-gray-400
+}
+
+body.dark-mode .Blogs{
+  @apply text-white
+}
+
+body.dark-mode .Blogs p{
+  @apply text-gray-400
+}
+
+body.dark-mode .Blogs-Container{
+  @apply bg-gray-800/50
+}
+
+
  :-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -118,4 +155,25 @@ body.dark-mode .Footer{
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(100, 100, 100, 0.4) transparent;
+}
+
+/* --------------------
+   ✅ Custom Animations
+-------------------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 1s ease forwards;
+}
+
+.animate-fadeUp {
+  animation: fadeUp 0.8s ease forwards;
 }

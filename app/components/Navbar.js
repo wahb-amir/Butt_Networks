@@ -12,7 +12,8 @@ import {
   LineChart,
   User2,
   FolderGit,
-  Phone
+  Phone,
+  Bot 
 } from 'lucide-react';
 
 const Navbar = () => {
@@ -34,8 +35,8 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="Navbar bg-gray-300 p-4 h-auto relative z-10 shadow-md">
-      <div className="flex justify-between items-center max-w-6xl mx-auto">
+    <nav className="fixed top-0 bg-gray-200 Navbar left-0 w-full p-4 z-10">
+      <div className="flex justify-between items-center">
         {/* Logo */}
         <h1 className="text-[30px] font-bold">Butt Networks</h1>
 
@@ -43,7 +44,7 @@ const Navbar = () => {
         <ul className="hidden min-[1021px]:flex space-x-8 items-center">
           <li>
             <Link
-              href="#home"
+              href="/"
               className="flex items-center gap-2 hover:text-yellow-300 hover:bg-gray-500 dark:hover:bg-gray-700 px-4 py-2 rounded font-semibold"
             >
               <Home size={18} /> Home
@@ -59,7 +60,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href="#projects"
+              href="/Projects"
               className="flex items-center gap-2 hover:text-yellow-300 hover:bg-gray-500 dark:hover:bg-gray-700 px-4 py-2 rounded font-semibold"
             >
               <FolderGit size={18} /> Projects
@@ -75,7 +76,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href="#contact"
+              href="/Contact"
               className="flex items-center gap-2 hover:text-yellow-300 hover:bg-gray-500 dark:hover:bg-gray-700 px-4 py-2 rounded font-semibold"
             >
               <Phone size={18} /> Contact
@@ -102,7 +103,7 @@ const Navbar = () => {
         <ul className="min-[1021px]:hidden mt-4 space-y-4 w-[160px] mx-auto text-center rounded-lg py-4 shadow-lg">
           <li>
             <Link
-              href="#home"
+              href="/"
               className="flex items-center justify-center gap-2 px-3 py-2 rounded active:bg-gray-400 dark:active:bg-gray-700"
             >
               <Home size={18} /> Home
@@ -118,7 +119,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href="#projects"
+              href="/Projects"
               className="flex items-center justify-center gap-2 px-3 py-2 rounded active:bg-gray-400 dark:active:bg-gray-700"
             >
               <LineChart size={18} /> Projects
@@ -134,7 +135,7 @@ const Navbar = () => {
           </li>
           <li>
               <Link
-              href="#contact"
+              href="/Contact"
               className="flex items-center justify-center gap-2 px-3 py-2 rounded active:bg-gray-400 dark:active:bg-gray-700"
             >
               <Phone size={18} /> Contact
