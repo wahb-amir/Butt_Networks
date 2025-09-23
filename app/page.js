@@ -3,7 +3,6 @@ import Home_ from './components/Home';
 import About from './components/About';
 import Skills from './components/Skills';
 import Projects from './components/Projects';
-import Collaboration from './components/Collaboration';
 import Ceo from './components/Ceo';
 import Offer from './components/Offer';
 import Footer from './components/Footer';
@@ -16,7 +15,6 @@ export default function Home() {
     <About/>
     <Skills/>
     <Projects/>
-    <Collaboration />
     <Ceo/>
     <Offer/>
     <Footer/>
