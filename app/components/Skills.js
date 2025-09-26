@@ -15,9 +15,16 @@ import {
   SiNextdotjs,
   SiC,
   SiTensorflow,
-  SiReactnative,
   SiReact,
 } from "react-icons/si";
+
+// Swiper imports
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const stack = [
   { 
@@ -75,10 +82,10 @@ const stack = [
     desc: "Versatile language for web, AI, and automation."
   },
   { 
-    name: "Sicket-Learn (ML)", 
+    name: "Scikit-Learn (ML)", 
     icon: <SiTensorflow className="text-orange-400" />, 
     progress: 45,
-    desc: "Open-source library for machine learning models."
+    desc: "Machine learning library for building models."
   },
   { 
     name: "Linux", 
@@ -104,29 +111,41 @@ const Skills = () => {
         Tech Stack
       </h1>
 
-      <div className="flex flex-wrap justify-center items-center gap-6 max-w-6xl mx-auto">
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        spaceBetween={20}
+        slidesPerView={1}
+        navigation
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 2500, disableOnInteraction: false }}
+        breakpoints={{
+          640: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+          1280: { slidesPerView: 4 },
+        }}
+        className="max-w-6xl mx-auto"
+      >
         {stack.map((item, index) => (
-          <div
-            key={index}
-            className="SkillsBox bg-gray-100 shadow-lg rounded-xl p-6 flex flex-col items-center gap-3 transition-transform duration-300 hover:scale-105 cursor-pointer w-60"
-          >
-            <div className="text-5xl">{item.icon}</div>
-            <p className="text-xl font-semibold text-gray-900">{item.name}</p>
-            <p className="text-sm text-gray-600 text-center">{item.desc}</p>
+          <SwiperSlide key={index}>
+            <div className="SkillsBox bg-gray-100 shadow-lg rounded-xl p-6 flex flex-col items-center gap-3 transition-transform duration-300 hover:scale-105 cursor-pointer">
+              <div className="text-5xl">{item.icon}</div>
+              <p className="text-xl font-semibold text-gray-900">{item.name}</p>
+              <p className="text-sm text-gray-600 text-center">{item.desc}</p>
 
-            {/* Progress bar */}
-            <div className="w-full bg-gray-200 rounded-full h-3 mt-2 relative overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full transition-all duration-700"
-                style={{ width: `${item.progress}%` }}
-              />
-              <span className="absolute inset-0 flex justify-center items-center text-xs font-semibold text-white">
-                {item.progress}%
-              </span>
+              {/* Progress bar */}
+              <div className="w-full bg-gray-200 rounded-full h-3 mt-2 relative overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full transition-all duration-700"
+                  style={{ width: `${item.progress}%` }}
+                />
+                <span className="absolute inset-0 flex justify-center items-center text-xs font-semibold text-white">
+                  {item.progress}%
+                </span>
+              </div>
             </div>
-          </div>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </section>
   );
 };
