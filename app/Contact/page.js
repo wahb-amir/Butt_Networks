@@ -25,7 +25,7 @@ const Contact = () => {
     console.log("🚀 Sending form data:", formData);
 
     try {
-      const res = await fetch("https://wahb.buttnetworks.com/api/contact", {
+      const res = await fetch("https://wahb.space/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
