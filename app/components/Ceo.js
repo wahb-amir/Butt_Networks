@@ -58,7 +58,7 @@ const Ceo = () => {
       {/* First CEO */}
       <div
         ref={sectionRef1}
-        className="Ceo-Container max-w-5xl mx-auto bg-gray-400 rounded-lg p-10 flex flex-col md:flex-row items-center gap-8 shadow-lg mb-12"
+        className="Ceo-Container max-w-5xl mx-auto bg-gray-100 rounded-[5px] p-10 flex flex-col md:flex-row items-center gap-8 shadow-lg mb-12"
       >
         <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-gray-300 shadow-md">
           <Image
@@ -110,7 +110,7 @@ const Ceo = () => {
       {/* Second CEO */}
       <div
         ref={sectionRef2}
-        className="Ceo-Container max-w-5xl mx-auto bg-gray-400 rounded-lg p-10 flex flex-col md:flex-row items-center gap-8 shadow-lg"
+        className="Ceo-Container max-w-5xl mx-auto bg-gray-100 rounded-[5px] p-10 flex flex-col md:flex-row items-center gap-8 shadow-lg"
       >
         <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-gray-300 shadow-md">
           <Image

@@ -4,22 +4,19 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Image from "next/image";
 
+// Swiper imports
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
 const blogs = [
-  {
-    image: "/blog1.jpg",
-    title: "Website Development",
-    desc: "Building modern, responsive, and user-friendly websites using the latest technologies like React, Next.js, and Tailwind CSS to ensure speed, security, and scalability.",
-  },
-  {
-    image: "/blog2.jpg",
-    title: "React Native",
-    desc: "Developing cross-platform mobile apps with React Native for smooth performance, native features, and a single codebase for both iOS and Android.",
-  },
-  {
-    image: "/blog3.jpg",
-    title: "Python and C",
-    desc: "Solving complex problems with Python for AI and automation while leveraging C for high-performance system programming and efficiency.",
-  },
+  { image: "/Poster1.png" },
+  { image: "/Poster2.png" },
+  { image: "/Poster3.png" },
+  { image: "/Poster4.png" },
+  { image: "/Poster5.png" },
 ];
 
 const About = () => {
@@ -31,7 +28,7 @@ const About = () => {
       (entries) => {
         if (entries[0].isIntersecting) {
           setVisible(true);
-          observer.disconnect(); // Animate once
+          observer.disconnect();
         }
       },
       { threshold: 0.2 }
@@ -49,32 +46,46 @@ const About = () => {
   return (
     <>
       <Navbar />
-      <section ref={sectionRef} className="Blogs mt-30">
-        <h1 className="text-center font-bold text-[40px] mb-5">Blogs</h1>
-        <div className="flex flex-wrap justify-center gap-20">
+      <section ref={sectionRef} className="Blogs mt-20">
+        <h1 className="text-center font-bold text-[40px] mb-10">Blogs</h1>
+
+        {/* Swiper Carousel */}
+        <Swiper
+          modules={[Pagination, Navigation, Autoplay]}
+          spaceBetween={30}
+          slidesPerView={1}
+          pagination={{ clickable: true }}
+          navigation={true}
+          autoplay={{ delay: 2500, disableOnInteraction: false }}
+          breakpoints={{
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+          className={`transition-all duration-700 opacity-0 ${
+            visible ? "animate-fadeUp opacity-100" : ""
+          }`}
+        >
           {blogs.map((item, index) => (
-            <div
-              key={index}
-              className={`Blogs-Container bg-gray-200 shadow-lg rounded-xl p-5 w-[100%] sm:w-[350px] text-center transform transition-all duration-700 opacity-0 ${
-                visible ? "animate-fadeUp" : ""
-              }`}
-              style={{
-                animationDelay: visible ? `${index * 0.2}s` : "0s",
-                animationFillMode: "forwards",
-              }}
-            >
-              <Image
-                src={item.image}
-                alt={item.title}
-                width={300}
-                height={300}
-                className="rounded-[5px] block m-auto"
-              />
-              <h2 className="text-xl font-semibold mt-3">{item.title}</h2>
-              <p className="text-gray-700">{item.desc}</p>
-            </div>
+            <SwiperSlide key={index}>
+              <div
+                className="About bg-gray-100 shadow-lg rounded-xl p-5 text-center"
+                style={{
+                  animationDelay: visible ? `${index * 0.2}s` : "0s",
+                  animationFillMode: "forwards",
+                }}
+              >
+                <Image
+                  src={item.image}
+                  alt={`Blog Poster ${index + 1}`}
+                  width={260}
+                  height={260}
+                  className="rounded-[5px] block m-auto"
+                />
+              </div>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </section>
       <Footer />
     </>
