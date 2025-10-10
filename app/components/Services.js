@@ -20,7 +20,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="mt-20">
+    <section className="Services mt-20">
       <h1 className="font-extrabold text-[40px] text-center mb-10">Services</h1>
 
       <Swiper
@@ -32,16 +32,16 @@ const Services = () => {
         autoplay={{ delay: 3000, disableOnInteraction: false }}
         breakpoints={{
           640: { slidesPerView: 1 },
-          1024: { slidesPerView: 3 }, // 3 cards on large screens
+          1024: { slidesPerView: 3 }, 
         }}
         className="w-full max-w-6xl px-6"
       >
         {services.map((item, index) => (
           <SwiperSlide key={index}>
-            <div className="flex flex-col items-center justify-center cursor-pointer rounded-[10px] bg-gray-200 w-[300px] h-[190px] mx-auto p-4 shadow-md hover:shadow-lg transition-all duration-300 gap-3">
-              <item.Icon size={40} className="text-gray-800" />
+            <div className="Services-Container flex flex-col items-center justify-center cursor-pointer rounded-[10px] bg-gray-200 w-[300px] h-[190px] mx-auto p-4 shadow-md hover:shadow-lg transition-all duration-300 gap-3">
+              <item.Icon size={40} className="Services-P text-gray-800" />
               <h1 className="text-xl font-bold">{item.Name}</h1>
-              <p className="text-gray-700 text-center">{item.Service}</p>
+              <p className="Services-P text-gray-700 text-center">{item.Service}</p>
             </div>
           </SwiperSlide>
         ))}

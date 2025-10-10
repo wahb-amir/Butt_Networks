@@ -131,6 +131,18 @@ body.dark-mode .Blogs-Container{
   @apply bg-gray-800/50
 }
 
+body.dark-mode .Services {
+  @apply text-white
+}
+
+body.dark-mode .Services-P {
+  @apply text-gray-400
+}
+
+body.dark-mode .Services-Container {
+  @apply bg-gray-800/50
+}
+
 
  :-webkit-scrollbar {
   width: 6px;
