@@ -7,6 +7,7 @@ import Ceo from './components/Ceo';
 import Offer from './components/Offer';
 import Footer from './components/Footer';
 import Services from './components/Services';
+import DigitalX from './components/DigitalX';
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
     <Skills/>
     <Services />
     <Projects/>
+    <DigitalX />
     <Ceo/>
     <Offer/>
     <Footer/>

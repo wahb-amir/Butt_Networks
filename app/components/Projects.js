@@ -5,14 +5,14 @@ import { ArrowRight } from "lucide-react";
 
 const projects = [
   {
-    Heading: "Blog Website",
-    Text: "A modern blog platform built with Next.js and Tailwind CSS. Features dynamic routing, SEO optimization, and a fully responsive UI.",
-    demoLink: "https://devblogs.buttnetworks.com/",
+    Heading: "Digital Website",
+    Text: "A modern digital platform built with Next.js and Tailwind CSS. Features dynamic routing, SEO optimization, and a fully responsive UI.",
+    demoLink: "https://digital-x.buttnetworks.com/",
   },
   {
-    Heading: "Business Website",
-    Text: "A professional business website with features like Dark-Mode and Contact Form built using Next, Node.js, Express, and MongoDB for full-stack functionality.",
-    demoLink: "https://buttnetworks.com/",
+    Heading: "Portfolio Website",
+    Text: "A professional portfolio website with features like Dark-Mode and Contact Form built using Next, Node.js, Express, and MongoDB for full-stack functionality.For our Client Syed Zeeshan Haider.",
+    demoLink: "https://syedzeeshanhaider.netlify.app/",
   },
   {
     Heading: "E-Commerce Store",
@@ -84,11 +84,11 @@ const Projects = () => {
             </div>
           </div>
         ))}
+      </div>
         <Link href='/Projects'>
-        <button className="mt-4 bg-gradient-to-r from-gray-600 to-gray-800 px-5 py-2 rounded-[6px] text-white cursor-pointer font-bold hover:scale-105 transform transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+        <button className="mt-8 block m-auto bg-gradient-to-r from-gray-600 to-gray-800 px-5 py-2 rounded-[6px] text-white cursor-pointer font-bold hover:scale-105 transform transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
         >View More Projets</button>
         </Link>
-      </div>
     </section>
   );
 };

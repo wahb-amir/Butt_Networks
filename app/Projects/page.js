@@ -12,14 +12,14 @@ import "swiper/css/pagination";
 
 const projects = [
   {
-    Heading: "Blog Website",
-    Text: "A modern blog platform built with Next.js and Tailwind CSS. Features dynamic routing, SEO optimization, and a fully responsive UI.",
-    demoLink: "https://devblogs.buttnetworks.com/",
+    Heading: "Digital Website",
+    Text: "A modern digital platform built with Next.js and Tailwind CSS. Features dynamic routing, SEO optimization, and a fully responsive UI.",
+    demoLink: "https://digital-x.buttnetworks.com/",
   },
   {
-    Heading: "Business Website",
-    Text: "A professional business website with features like Dark Mode and Contact Form, built using React, Node.js, Express, and MongoDB for full-stack functionality.",
-    demoLink: "https://buttnetworks.com/",
+    Heading: "Portfolio Website",
+    Text: "A professional portfolio website with features like Dark-Mode and Contact Form built using Next, Node.js, Express, and MongoDB for full-stack functionality.For our Client Syed Zeeshan Haider.",
+    demoLink: "https://syedzeeshanhaider.netlify.app/",
   },
   {
     Heading: "Quiz App",
