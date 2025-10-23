@@ -143,6 +143,17 @@ body.dark-mode .Services-Container {
   @apply bg-gray-800/50
 }
 
+body.dark-mode .DigitalX{
+  @apply text-white
+}
+
+body.dark-mode .DigitalX-Title{
+  @apply text-gray-300
+}
+
+body.dark-mode .DigitalX-ul{
+  @apply text-gray-200
+}
 
  :-webkit-scrollbar {
   width: 6px;
