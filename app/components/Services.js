@@ -38,7 +38,7 @@ const Services = () => {
       >
         {services.map((item, index) => (
           <SwiperSlide key={index}>
-            <div className="Services-Container flex flex-col items-center justify-center cursor-pointer rounded-[10px] bg-gray-200 w-[300px] h-[190px] mx-auto p-4 shadow-md hover:shadow-lg transition-all duration-300 gap-3">
+            <div className="Services-Container flex flex-col items-center justify-center cursor-pointer rounded-[10px] bg-gray-50 w-[300px] h-[190px] mx-auto p-4 shadow-md hover:shadow-lg transition-all duration-300 gap-3">
               <item.Icon size={40} className="Services-P text-gray-800" />
               <h1 className="text-xl font-bold">{item.Name}</h1>
               <p className="Services-P text-gray-700 text-center">{item.Service}</p>

@@ -93,7 +93,7 @@ const About = () => {
         <Link href='/About'>
         <button className="button mt-5 px-8 py-3 bg-gradient-to-r from-gray-800 to-gray-900 
                 text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition"
-              type="button">Explore Website Development</button>
+              type="button">Explore Our Blogs</button>
               </Link>
       </div>
     </section>

@@ -18,12 +18,12 @@ const project = {
 
 const DigitalX = () => {
   return (
-    <section className="mt-20 mb-20 px-4 sm:px-8 lg:px-16">
+    <section className="DigitalX mt-20 mb-20 px-4 sm:px-8 lg:px-16">
       <header className="text-center mb-12">
         <h2 className="font-extrabold text-4xl sm:text-5xl">
           {project.subtitle}
         </h2>
-        <h3 className="mt-2 text-gray-900 font-bold text-3xl sm:text-4xl">
+        <h3 className="DigitalX-Title mt-2 text-gray-900 font-bold text-3xl sm:text-4xl">
           {project.title}
         </h3>
       </header>
@@ -31,13 +31,13 @@ const DigitalX = () => {
       <div className="flex flex-col-reverse lg:flex-row items-center gap-10">
         {/* Left: text / info */}
         <div className="flex-1 space-y-6">
-          <p className="text-gray-700 leading-relaxed">
+          <p className="DigitalX text-gray-700 leading-relaxed">
             {project.description}
           </p>
 
           <ul className="list-disc list-inside space-y-2 text-gray-600">
             {project.features.map((feat, idx) => (
-              <li key={idx} className="hover:text-gray-900 transition-colors">
+              <li key={idx} className="DigitalX-ul hover:text-gray-900 transition-colors">
                 {feat}
               </li>
             ))}
