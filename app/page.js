@@ -8,12 +8,10 @@ import Offer from './components/Offer';
 import Footer from './components/Footer';
 import Services from './components/Services';
 import DigitalX from './components/DigitalX';
-import Birthday from './components/BirthDay'
 
 export default function Home() {
   return (
     <>
-      <Birthday />
       <Navbar />
       <Home_ />
       <About />
