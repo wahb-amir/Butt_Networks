@@ -18,7 +18,6 @@ export default function Home() {
       <Skills />
       <Services />
       <Projects />
-      <DigitalX />
       <Ceo />
       <Offer />
       <Footer />

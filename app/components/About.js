@@ -51,7 +51,7 @@ const About = () => {
 
         {/* Typewriter text */}
         {hasStarted && (
-          <p className="text-lg text-gray-100 leading-relaxed animate-fadeIn delay-200 whitespace-pre-line">
+          <p className="text-lg text-gray-200 leading-relaxed animate-fadeIn delay-200 whitespace-pre-line">
             <Typewriter
               words={[fullText]}
               cursor
