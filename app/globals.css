@@ -155,6 +155,14 @@ body.dark-mode .DigitalX-ul{
   @apply text-gray-200
 }
 
+body.dark-mode .QuizApp {
+  @apply text-white
+}
+
+body.dark-mode .Quiz-Text {
+  @apply text-gray-400
+}
+
  :-webkit-scrollbar {
   width: 6px;
   height: 6px;
