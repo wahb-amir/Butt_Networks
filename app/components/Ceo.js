@@ -97,8 +97,7 @@ const Ceo = () => {
             className="w-full md:w-auto"
           >
             <button
-              className="button px-8 py-3 bg-gradient-to-r from-gray-800 to-gray-900 
-                text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition"
+              className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow hover:bg-blue-700 transition"
               type="button"
             >
               Visit Profile
@@ -147,10 +146,7 @@ const Ceo = () => {
             className="w-full md:w-auto"
           >
             <button
-              className="button px-8 py-3 bg-gradient-to-r from-gray-800 to-gray-900 
-                text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition"
-              type="button"
-            >
+              className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow hover:bg-blue-700 transition">
               Visit Profile
             </button>
           </a>

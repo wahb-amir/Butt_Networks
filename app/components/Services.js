@@ -20,7 +20,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="Services mt-20">
+    <section className="Services mt-20" id="services">
       <h1 className="font-extrabold text-[40px] text-center mb-10">Services</h1>
 
       <Swiper

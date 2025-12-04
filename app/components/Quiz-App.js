@@ -7,7 +7,7 @@ const Quiz_App = () => {
         
         {/* Header */}
         <h1 className="text-4xl lg:text-5xl font-extrabold mb-4">
-          Master Coding Skills with <span className="text-yellow-500">Fun Quizzes!</span>
+          Master Coding Skills with <span className="text-blue-600">Fun Quizzes!</span>
         </h1>
 
         {/* Description */}
@@ -20,7 +20,7 @@ const Quiz_App = () => {
           <a 
             href="/application-2d156cdb-76b2-4890-bfc6-786960778d89.apk" 
             download
-            className="bg-yellow-500 text-gray-900 font-bold py-3 px-6 rounded-lg hover:bg-yellow-600 transition"
+            className="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-700 transition"
           >
             Download Now
           </a>

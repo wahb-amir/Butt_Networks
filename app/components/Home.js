@@ -1,78 +1,78 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 
 const Home_ = () => {
-  // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
-  };
-
-  const buttonVariants = {
-    hover: { scale: 1.05, boxShadow: "0px 10px 20px rgba(0,0,0,0.3)" },
-    tap: { scale: 0.95 },
-  };
-
   return (
     <section
       id="home"
-      className="Home py-20 px-5 bg-gradient-to-br from-gray-500 to-gray-400 mt-19 cursor-pointer"
+      className="mt-30 w-full flex flex-col justify-center items-center text-center px-4 cursor-default"
     >
-      {/* MAIN CONTENT */}
-      <motion.div
-        className="max-w-5xl mx-auto bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-10 
-       transform hover:scale-[1.01] transition duration-300 border border-white/10"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
+      {/* Heading */}
+      <motion.h1
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        className="Home font-extrabold text-4xl md:text-6xl text-gray-900"
       >
-        <motion.h1
-          className="text-4xl font-extrabold text-white mb-3 drop-shadow-lg"
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {/* Typewriter Effect */}
-          <Typewriter
-            words={["🚀 Welcome to Butt Networks"]}
-            loop={false}
-            cursor
-            cursorStyle="_"
-            typeSpeed={80}
-            deleteSpeed={50}
-          />
-        </motion.h1>
+        Welcome to <span className="text-blue-600">Butt Networks</span>
+      </motion.h1>
 
-        <motion.h2
-          className="text-2xl text-gray-300 font-semibold mb-4"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-        >
-          Full Stack Web Development
-        </motion.h2>
+      {/* Typewriter Text */}
+      <motion.h2
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, duration: 0.7 }}
+        className="Home-Text mt-4 text-xl md:text-3xl font-semibold text-gray-700"
+      >
+        <Typewriter
+          words={[
+            "Professional Web Development",
+            "React & Next.js Expert",
+            "Modern UI/UX Designs",
+            "Fast, Secure & Optimized Websites",
+          ]}
+          loop={true}
+          cursor
+          cursorStyle="|"
+          typeSpeed={60}
+          deleteSpeed={40}
+          delaySpeed={1500}
+        />
+      </motion.h2>
 
-        <motion.p
-          className="text-lg text-gray-200 mb-6 leading-relaxed"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1 }}
-        >
-          Building modern web applications with a focus on user experience,
-          performance, and responsive design. We bring your ideas to life with
-          scalable and elegant code.
-        </motion.p>
+      {/* Description */}
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1, duration: 0.7 }}
+        className="Home max-w-2xl mt-6 text-gray-600 text-base md:text-lg"
+      >
+        We build fast, secure & high-performance websites for businesses,
+        startups & personal brands — with modern technologies and elegant UI.
+      </motion.p>
 
-        <motion.a href="#skills" variants={buttonVariants} whileHover="hover" whileTap="tap">
-          <button
-            className="button px-6 py-3 bg-gradient-to-r from-gray-800 to-gray-900 
-        text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl transition"
-          >
-            Get Started
-          </button>
-        </motion.a>
+      {/* CTA Buttons */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.3, duration: 0.7 }}
+        className="mt-8 flex gap-4"
+      >
+        <Link href='#services'>
+        <button className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow hover:bg-blue-700 transition">
+          Our Services
+        </button>
+        </Link>
+
+        <Link href="/Contact">
+        <button className="Home px-6 py-3 border border-gray-400 text-gray-600 font-semibold rounded-xl hover:bg-gray-400 transition">
+          Contact Us
+        </button>
+        </Link>
+
       </motion.div>
     </section>
   );

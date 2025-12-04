@@ -35,7 +35,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 bg-gray-200 Navbar left-0 w-full p-4 z-10">
+    <nav className="fixed top-0 bg-gray-50  Navbar left-0 w-full p-4 z-10">
       <div className="flex justify-between items-center">
         {/* Logo */}
         <h1 className="text-[30px] font-bold">Butt Networks</h1>

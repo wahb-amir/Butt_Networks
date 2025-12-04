@@ -8,6 +8,7 @@ import Offer from './components/Offer';
 import Footer from './components/Footer';
 import Services from './components/Services';
 import Quiz_App from './components/Quiz-App';
+import MakeWeb from './components/MakeWeb';
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <Skills />
       <Services />
       <Projects />
+      <MakeWeb />
       <Quiz_App />
       <Ceo />
       <Offer />

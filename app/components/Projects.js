@@ -77,7 +77,7 @@ const Projects = () => {
                 href={project.demoLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 bg-gradient-to-r from-gray-600 to-gray-800 px-5 py-2 rounded-[6px] text-white cursor-pointer font-bold hover:scale-105 transform transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow hover:bg-blue-700 transition"
               >
                 Live Demo
               </a>
@@ -86,7 +86,7 @@ const Projects = () => {
         ))}
       </div>
         <Link href='/Projects'>
-        <button className="mt-8 block m-auto bg-gradient-to-r from-gray-600 to-gray-800 px-5 py-2 rounded-[6px] text-white cursor-pointer font-bold hover:scale-105 transform transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+        <button className="block m-auto mt-8 px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow hover:bg-blue-700 transition"
         >View More Projets</button>
         </Link>
     </section>
