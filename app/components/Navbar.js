@@ -76,14 +76,14 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href="/Contact"
+              href="/contact"
               className="flex items-center gap-2 hover:text-yellow-300 hover:bg-gray-500 dark:hover:bg-gray-700 px-4 py-2 rounded font-semibold"
             >
               <Phone size={18} /> Contact
             </Link>
           </li>
           <li>
-            <button onClick={handleDarkMode} className="text-2xl mt-[8px]">
+            <button onClick={handleDarkMode} className="text-2xl mt-2">
               {isDarkMode ? <Moon size={22} /> : <Sun size={22} />}
             </button>
           </li>
@@ -100,7 +100,7 @@ const Navbar = () => {
 
       {/* Mobile dropdown - visible only on small screens */}
       {isOpen && (
-        <ul className="min-[1021px]:hidden mt-4 space-y-4 w-[160px] mx-auto text-center rounded-lg py-4 shadow-lg">
+        <ul className="min-[1021px]:hidden mt-4 space-y-4 w-40 mx-auto text-center rounded-lg py-4 shadow-lg">
           <li>
             <Link
               href="/"
@@ -135,7 +135,7 @@ const Navbar = () => {
           </li>
           <li>
               <Link
-              href="/Contact"
+              href="/contact"
               className="flex items-center justify-center gap-2 px-3 py-2 rounded active:bg-gray-400 dark:active:bg-gray-700"
             >
               <Phone size={18} /> Contact

@@ -58,7 +58,7 @@ const Projects = () => {
         {projects.map((project, index) => (
           <div
             key={index}
-            className={`Projects-Container w-full sm:w-[300px] md:w-[350px] bg-gray-100 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 p-6 flex flex-col justify-between opacity-0 ${
+            className={`Projects-Container w-full sm:w-87.5 md:w-87.5 bg-gray-100 rounded-xl shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 p-6 flex flex-col justify-between opacity-0 ${
               visible ? "animate-fadeUp" : ""
             }`}
             style={{
