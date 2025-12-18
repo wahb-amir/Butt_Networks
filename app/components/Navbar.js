@@ -135,7 +135,7 @@ const Navbar = () => {
           </li>
           <li>
               <Link
-              href="/contact"
+              href="/Contact"
               className="flex items-center justify-center gap-2 px-3 py-2 rounded active:bg-gray-400 dark:active:bg-gray-700"
             >
               <Phone size={18} /> Contact
