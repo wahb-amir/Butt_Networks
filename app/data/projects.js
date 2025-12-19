@@ -7,10 +7,10 @@ export const projects = [
     demoLink: "https://digital-x.buttnetworks.com/",
     githubLink: "https://github.com/ShahanwazSaddam144/digital-x",
     images: [
-      "/projects/digital/home.png",
-      "/projects/digital/main.png",
-      "/projects/digital/near-footer.png",
-      "/projects/digital/footer.png",
+      "/projects/digital/home.PNG",
+      "/projects/digital/main.PNG",
+      "/projects/digital/near-footer.PNG",
+      "/projects/digital/footer.PNG",
     ],
     tech: ["Next.js", "Tailwind CSS", "React", "Vercel", "SEO"],
     authors: [
