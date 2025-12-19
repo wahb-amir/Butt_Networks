@@ -45,7 +45,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href="/#about"
+              href="/About"
               className="flex items-center gap-2 hover:text-yellow-300 hover:bg-gray-500 dark:hover:bg-gray-700 px-4 py-2 rounded font-semibold"
             >
               <MessageSquare size={18} /> About
@@ -61,7 +61,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href="#ceo"
+              href="/#ceo"
               className="flex items-center gap-2 hover:text-yellow-300 hover:bg-gray-500 dark:hover:bg-gray-700 px-4 py-2 rounded font-semibold"
             >
               <User2 size={18} /> Our CEO
