@@ -45,7 +45,7 @@ const Navbar = () => {
           <li>
             <Link
               href="/"
-              className="flex items-center gap-2 hover:text-yellow-300 hover:bg-gray-500 dark:hover:bg-gray-700 px-4 py-2 rounded font-semibold"
+              className="flex items-center gap-2 hover:text-yellow-300 hover:bg-gray-700 px-4 py-2 rounded font-semibold"
             >
               <Home size={18} /> Home
             </Link>
