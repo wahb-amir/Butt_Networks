@@ -681,7 +681,7 @@ export default function Projects({
       {limit !== "all" && (
         <div className="text-center mt-8">
           <Link
-            href="/projects"
+            href="/Projects"
             className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700 transition"
           >
             View all projects
