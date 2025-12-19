@@ -8,11 +8,11 @@ const MakeWeb = () => {
   const [delivery, setDelivery] = useState("");
 
   const projectPrices = {
-    website: 15000,
-    reactnative: 30000,
-    ecommerce: 20000,
-    portfolio: 8000,
-    api: 12000,
+    website: 145,
+    reactnative: 270,
+    ecommerce: 215,
+    portfolio: 70,
+    api: 125,
   };
 
   const getEstimatedPrice = () => {
@@ -20,14 +20,15 @@ const MakeWeb = () => {
 
     let basePrice = projectPrices[projectType];
 
-    if (budget === "medium") basePrice += 5000;
-    if (budget === "high") basePrice += 12000;
+    if (budget === "medium") basePrice += 50;
+    if (budget === "high") basePrice += 100;
 
-    if (delivery === "fast") basePrice += 7000;
-    if (delivery === "superfast") basePrice += 15000;
+    if (delivery === "fast") basePrice += 75;
+    if (delivery === "superfast") basePrice += 150;
 
     return basePrice;
   };
+
 
   return (
     <>
@@ -96,7 +97,7 @@ const MakeWeb = () => {
           <div className="mt-8 p-6 bg-gradient-to-br from-blue-500 to-blue-800 rounded-2xl shadow-xl text-center">
             <h2 className="text-xl font-extrabold text-white">Estimated Price</h2>
             <p className="text-4xl font-black mt-2 text-white drop-shadow-xl">
-              Rs. {getEstimatedPrice().toLocaleString()}
+              ${getEstimatedPrice().toLocaleString()}
             </p>
           </div>
 
