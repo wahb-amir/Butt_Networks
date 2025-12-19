@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+
 import Image from "next/image";
 
 // Swiper imports
@@ -45,7 +44,7 @@ const About = () => {
 
   return (
     <>
-      <Navbar />
+
       <section ref={sectionRef} className="Blogs mt-20">
         <h1 className="text-center font-bold text-[40px] mb-10">Blogs</h1>
 
@@ -87,7 +86,6 @@ const About = () => {
           ))}
         </Swiper>
       </section>
-      <Footer />
     </>
   );
 };

@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import {useTheme} from './ThemeProvider';
 import {
   Sun,
   Moon,
@@ -18,27 +20,18 @@ import {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
+  const {isDarkMode,toggle} = useTheme();
   const handleDarkMode = () => {
-    const darkModeOn = !isDarkMode;
-    setIsDarkMode(darkModeOn);
-    document.body.classList.toggle('dark-mode', darkModeOn);
-    localStorage.setItem('theme', darkModeOn ? 'dark' : 'light');
+    toggle();
   };
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    const isDark = savedTheme === 'dark';
-    setIsDarkMode(isDark);
-    if (isDark) document.body.classList.add('dark-mode');
-  }, []);
 
+  const router = useRouter();
   return (
     <nav className="fixed top-0 bg-gray-50  Navbar left-0 w-full p-4 z-10">
       <div className="flex justify-between items-center">
         {/* Logo */}
-        <h1 className="text-[30px] font-bold">Butt Networks</h1>
+        <h1 className="text-[30px] font-bold cursor-pointer" onClick={() => router.push("/")}>Butt Networks</h1>
 
         {/* Desktop links - visible only after 1021px */}
         <ul className="hidden min-[1021px]:flex space-x-8 items-center">
@@ -52,7 +45,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href="#about"
+              href="/#about"
               className="flex items-center gap-2 hover:text-yellow-300 hover:bg-gray-500 dark:hover:bg-gray-700 px-4 py-2 rounded font-semibold"
             >
               <MessageSquare size={18} /> About
@@ -60,7 +53,7 @@ const Navbar = () => {
           </li>
           <li>
             <Link
-              href="/Projects"
+              href="/projects"
               className="flex items-center gap-2 hover:text-yellow-300 hover:bg-gray-500 dark:hover:bg-gray-700 px-4 py-2 rounded font-semibold"
             >
               <FolderGit size={18} /> Projects

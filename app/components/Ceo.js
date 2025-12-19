@@ -77,7 +77,7 @@ const Ceo = () => {
           <p className="text-lg font-semibold text-gray-700 mb-4">
             Chief Executive Officer & Founder
           </p>
-          <p className="text-gray-800 leading-relaxed mb-6 min-h-[5rem] whitespace-pre-wrap">
+          <p className="text-gray-800 leading-relaxed mb-6 min-h-20 whitespace-pre-wrap">
             {startTyping1 && (
               <Typewriter
                 words={[fullText1]}
@@ -123,10 +123,8 @@ const Ceo = () => {
 
         <div className="text-center md:text-left flex flex-col items-center md:items-start max-w-xl">
           <h2 className="text-3xl font-bold mb-2 text-gray-900">Wahb Amir</h2>
-          <p className="text-lg font-semibold text-gray-700 mb-4">
-            Co-Founder
-          </p>
-          <p className="text-gray-800 leading-relaxed mb-6 min-h-[5rem] whitespace-pre-wrap">
+          <p className="text-lg font-semibold text-gray-700 mb-4">Co-Founder</p>
+          <p className="text-gray-800 leading-relaxed mb-6 min-h-20 whitespace-pre-wrap">
             {startTyping2 && (
               <Typewriter
                 words={[fullText2]}
@@ -140,13 +138,12 @@ const Ceo = () => {
           </p>
 
           <a
-            href="https://wahb.buttnetworks.com/"
+            href="https://wahb.space"
             target="_blank"
             rel="noreferrer"
             className="w-full md:w-auto"
           >
-            <button
-              className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow hover:bg-blue-700 transition">
+            <button className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow hover:bg-blue-700 transition">
               Visit Profile
             </button>
           </a>
