@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import { SiGithub } from "react-icons/si";
 
 const CONTACT_EMAIL = "shahnawazsaddamb@gmail.com";
@@ -101,7 +99,6 @@ const Contact = () => {
 
   return (
     <>
-      <Navbar />
       <section id="contact" className="contact py-16 px-4 mt-12">
         <div className="max-w-2xl mx-auto">
           <h1 className="text-3xl sm:text-4xl font-bold text-center mb-8">
@@ -270,7 +267,7 @@ const Contact = () => {
               type="submit"
               disabled={isBusy}
               aria-busy={isBusy}
-              className={`button py-3 w-[100%] block m-auto bg-gradient-to-r from-gray-800 to-gray-900 
+              className={`button py-3 w-full block m-auto bg-gradient-to-r from-gray-800 to-gray-900 
                 text-white font-semibold rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition ${isBusy ? "opacity-70 cursor-not-allowed" : ""}`}
             >
               {status === "sending" ? "Sending..." : status === "sent" ? "✅ Sent!" : status === "error" ? "Error" : "Get Started"}
@@ -284,7 +281,6 @@ const Contact = () => {
           )}
         </div>
       </section>
-      <Footer />
     </>
   );
 };

@@ -1,0 +1,218 @@
+export const projects = [
+  {
+    id: "digital-website",
+    heading: "Digital Website",
+    description:
+      "Next.js and Tailwind were used to create a quick, SEO-ready marketing platform that is accessible, responsive, and optimised for high Core Web Vitals.",
+    demoLink: "https://digital-x.buttnetworks.com/",
+    githubLink: "https://github.com/ShahanwazSaddam144/digital-x",
+    images: [
+      "/projects/digital/home.png",
+      "/projects/digital/main.png",
+      "/projects/digital/near-footer.png",
+      "/projects/digital/footer.png",
+    ],
+    tech: ["Next.js", "Tailwind CSS", "React", "Vercel", "SEO"],
+    authors: [
+      {
+        name: "Wahb Amir",
+        role: "Backend & DevOps",
+        portfolio: "https://wahb.space",
+      },
+      {
+        name: "Shahnawaz Butt",
+        role: "Frontend & UI/UX",
+        portfolio: "https://shahnawaz.buttnetworks.com",
+      },
+    ],
+    startDate: "October 7,2025",
+    endDate: "December 10,2025",
+    status: "completed",
+    highlights: [
+      "SEO-friendly pages with dynamic routing",
+      "Mobile-first responsive UI across breakpoints",
+      "ISR/SSR performance tuning for fast load times",
+    ],
+    priority: 3,
+  },
+  {
+    id: "portfolio-website",
+    heading: "Portfolio Website",
+    description:
+      "A polished portfolio featuring a contact workflow, Dark Mode, and a full-stack build for content management and smooth client updates.",
+    demoLink: "https://syedzeeshanhaider.netlify.app/",
+    githubLink: "https://github.com/coder101-js/Zeeshan",
+    images: [
+      "/projects/Portfolio/home.png",
+      "/projects/Portfolio/main.png",
+      "/projects/Portfolio/achievements.png",
+      "/projects/Portfolio/projects.png",
+    ],
+    tech: ["Next.js", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
+    authors: [
+      { name: "Wahb Amir", role: "Frontend", portfolio: "https://wahb.space" },
+      {
+        name: "Shahnawaz Butt",
+        role: "Frontend & Design",
+        portfolio: "https://shahnawaz.buttnetworks.com",
+      },
+    ],
+    startDate: "September 11, 2025",
+    endDate: "September 13, 2025",
+    status: "completed",
+    highlights: [
+      "User-friendly dark mode and smooth UI transitions",
+      "Contact form with reliable email integration",
+      "Simple CMS for client-managed content",
+    ],
+    priority: 4,
+  },
+  {
+    id: "client-dev-platform",
+    heading: "Client–Dev Collaboration Platform",
+    description:
+      "A unified platform connecting clients and development teams — request quotes, receive email alerts, view project progress & assignees, chat with developers, and automatically sync GitHub repo activity to project status.",
+    demoLink: "https://projects.buttnetworks.com",
+    githubLink: [
+      {
+        url: "https://github.com/coder101-js/dev-dashboard",
+        name: "Client App",
+      },
+      {
+        url: "https://github.com/coder101-js/dashboard",
+        name: "Developer App",
+      },
+    ],
+    images: [
+      "/projects/Platform/Login.png",
+      "/projects/Platform/Dashboard.png",
+      "/projects/Platform/Quote.png",
+    ],
+    tech: [
+      "Next.js",
+      "React",
+      "Node.js",
+      "Tailwind",
+      "MongoDB",
+      "GitHub Webhooks",
+    ],
+    authors: [
+      {
+        name: "Wahb Amir",
+        role: "Full-Stack Engineer",
+        portfolio: "https://wahb.space",
+      },
+    ],
+    role: "Full-Stack Engineer",
+    category: "Platform",
+    status: "Updating",
+    highlights: [
+      "Built a comprehensive client portal allowing quote requests, project progress tracking, visibility into who’s working on what, and direct chat with assigned developers.",
+      "Developed a developer dashboard to manage tasks, update progress, assign team members, and efficiently review client requests in a single workspace.",
+      "Implemented role-based access control (RBAC) ensuring Clients, PMs, and Developers see only the views and actions relevant to them.",
+      "Automated user setup and project onboarding, including GitHub repository creation and webhook integration to sync commits and PR events directly to project status.",
+      "Integrated real-time communication with Socket.io, plus email and in-app alerts for quote responses, status changes, and mentions to keep all stakeholders informed.",
+      "Deployed the platform with CI/CD pipelines and secure OAuth authentication for seamless GitHub integration.",
+      "Delivered a unified collaboration surface that improved visibility, reduced coordination friction, and allowed clients to track progress while developers maintained an organized workflow.",
+      "Enabled automation for repository creation and progress tracking, and implemented key features including quote requests, notifications, real-time chat, progress timelines, and role-based authorization.",
+    ],
+    startDate: "November 1,2025",
+    endDate: null,
+    outcome:
+      "Delivered a single collaboration surface that improved visibility and reduced coordination friction for both clients and developers.",
+    problem:
+      "Clients and development teams lacked a single workspace to request quotes, track progress, communicate, and sync repository activity into task status.",
+    stats: {
+      automation: "Auto repo creation & webhook sync for project status",
+      features:
+        "Quote requests, email alerts, real-time chat, progress timeline, role-based auth",
+    },
+    priority: 9,
+  },
+
+  //   {
+  //     id: "tic-tac-toe",
+  //     heading: "Tic Tac Toe",
+  //     description:
+  //       "Fun, responsive, and mobile-friendly, this lightweight, polished Tic Tac Toe features an AI opponent and clear user interface feedback.",
+  //     demoLink: "https://tic-tac-toebuttnetworks.netlify.app/",
+  //     githubLink: "https://github.com/buttnetworks/tic-tac-toe",
+  //     images: ["/project.png", "/project.png"],
+  //     tech: ["React", "JavaScript", "CSS", "HTML"],
+  //     authors: [
+  //       {
+  //         name: "Shahnawaz Butt",
+  //         role: "Frontend & Game Logic",
+  //         portfolio: "https://shahnawaz.buttnetworks.com",
+  //       },
+  //     ],
+  //     startDate: "2024-09-10",
+  //     endDate: "2024-09-20",
+  //     status: "completed",
+  //     highlights: [
+  //       "AI opponent with predictable difficulty curve",
+  //       "Responsive controls and quick game loop",
+  //       "Polished win detection and subtle UI animations",
+  //     ],
+  //     priority: 3,
+  //   },
+  {
+    id: "ecommerce-store",
+    heading: "E-Commerce Store",
+    description:
+      "A safe, ready-to-use online store with JWT authentication, Stripe payments, and persistent cart syncing across devices.",
+    demoLink: "https://boltform.buttnetworks.com/",
+    githubLink: "https://github.com/coder101-js/Ecommer-Store",
+    images: [
+      "/projects/Ecom/light-shop.png",
+      "/projects/Ecom/light-men.png",
+      "/projects/Ecom/light-women.png",
+      "/projects/Ecom/light-product.png",
+      "/projects/Ecom/stripe.png",
+    ],
+    tech: ["Next.js", "Node.js", "MongoDB", "Stripe", "Tailwind CSS"],
+    authors: [
+      {
+        name: "Wahb Amir",
+        role: "Frontend & UX & Backend & Payments",
+        portfolio: "https://wahb.space",
+      },
+    ],
+    startDate: "July 19, 2025",
+    endDate: "July 26, 2025",
+    status: "completed",
+    highlights: [
+      "Secure Stripe checkout and payment flows",
+      "JWT authentication and cart persistence",
+      "Category browsing and admin-ready product management",
+    ],
+    priority: 8,
+  },
+//   {
+//     id: "note-pad",
+//     heading: "Note Pad",
+//     description:
+//       "Built with Python and Tkinter, this lightweight desktop notepad is packaged as a Windows executable, opens quickly, and supports simple formatting.",
+//     demoLink: "/notepad.exe",
+//     githubLink: null,
+//     images: ["/project.png", "/project.png"],
+//     tech: ["Python", "Tkinter", "PyInstaller"],
+//     authors: [
+//       {
+//         name: "Shahnawaz Butt",
+//         role: "Logic & Packaging",
+//         portfolio: "https://shahnawaz.buttnetworks.com",
+//       },
+//     ],
+//     startDate: null,
+//     endDate: null,
+//     status: "completed",
+//     highlights: [
+//       "Basic rich-text formatting and save/export options",
+//       "Very lightweight and fast startup",
+//       "Packaged as a portable Windows .exe",
+//     ],
+//     type: "non-web",
+//     priority: 2,
+//   },
+];

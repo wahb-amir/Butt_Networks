@@ -67,7 +67,7 @@ const Home_ = () => {
         </button>
         </Link>
 
-        <Link href="/Contact">
+        <Link href="/contact">
         <button className="Home px-6 py-3 border border-gray-400 text-gray-600 font-semibold rounded-xl hover:bg-gray-400 transition">
           Contact Us
         </button>
