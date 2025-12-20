@@ -15,7 +15,7 @@ import {
 export default function Projects({
   limit = 3,
   projects: projectsData = defaultProjects,
-  heading = "Our Work — Full-Stack Collabs",
+  heading = "Our Work",
   subHeading = "Modern, fast and built for real users",
   single = false, // optional prop to force single-project (case study) layout
 }) {
