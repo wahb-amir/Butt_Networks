@@ -30,7 +30,7 @@ const Founder = () => {
      COPY
   ======================== */
   const fullText1 =
-    "Co-founder and full-stack developer working primarily with the MERN stack. Shahnawaz focuses on frontend development, building clean user interfaces and connecting them with reliable backend systems.";
+    "founder and full-stack developer working primarily with the MERN stack. Shahnawaz focuses on frontend development, building clean user interfaces and connecting them with reliable backend systems.";
 
   const fullText2 =
     "Co-founder and technical lead overseeing system design, backend development, security, and deployment. Wahb works across the entire stack to ensure products are scalable, performant, and production-ready.";
