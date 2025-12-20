@@ -348,7 +348,7 @@ const MakeWeb = () => {
                 onClick={() => {
                   /* Example CTA - wire up to contact or quote flow */
                   // For now open contact in new tab or scroll - left as integration point
-                  window?.open?.("/contact", "_blank");
+                  window?.open?.("/Contact", "_blank");
                 }}
                 disabled={!priceBreakdown.valid}
                 className={`flex-1 py-2 rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 transition ${
