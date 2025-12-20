@@ -102,7 +102,7 @@ const Founder = () => {
           </h2>
 
           <p className={`text-lg font-semibold mb-4 ${subtitleText}`}>
-            Co-Founder & Full-Stack Developer
+            Founder & Full-Stack Developer
           </p>
 
           <p
