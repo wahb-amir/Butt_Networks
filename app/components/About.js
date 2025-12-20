@@ -1,102 +1,293 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
+import Link from "next/link";
 import { Network, ShieldCheck, Cpu, Lightbulb } from "lucide-react";
 import { Typewriter } from "react-simple-typewriter";
-import Link from 'next/link';
+import { useTheme } from "./ThemeProvider"; // expects your ThemeProvider hook
 
-const About = () => {
-  const [showSignature, setShowSignature] = useState(false);
-  const [hasStarted, setHasStarted] = useState(false);
+const COPY_VARIANTS = {
+  professional: `Butt Networks is a small development team that specialises in creating cutting-edge, dependable, and safe online solutions for people and companies. In order to design scalable systems and continuously improve by constructing real-world projects, we combine strong technical foundations with innovative problem-solving techniques.`,
+};
+
+const statsInitial = [
+  { id: "projects", label: "Projects Built", value: 5 },
+  { id: "collabs", label: "Team Collaborations", value: 2 },
+  { id: "tech", label: "Technologies Used", value: 10 },
+];
+
+function useCountUp(active, target, duration = 1200) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    let start = null;
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const elapsed = timestamp - start;
+      const progress = Math.min(elapsed / duration, 1);
+      setCount(Number((target * progress).toFixed(target % 1 ? 2 : 0)));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [active, target, duration]);
+  return count;
+}
+
+const About = ({ copyVariant = "professional" }) => {
+  const { isDarkMode } = useTheme?.() ?? { isDarkMode: false };
+
+  // theme classes (from your example)
+  const cardBg = isDarkMode ? "bg-gray-800" : "bg-gray-50";
+  const cardInnerBg = isDarkMode ? "bg-gray-900" : "bg-white";
+  const titleText = isDarkMode ? "text-gray-200" : "text-gray-900";
+  const subtitleText = isDarkMode ? "text-gray-400" : "text-gray-600";
+  const sectionBg = isDarkMode ? "bg-gray-900/60" : "bg-white/60";
+  const borderClass = isDarkMode ? "border-gray-700" : "border-gray-100";
+  const iconColor = isDarkMode ? "text-blue-300" : "text-blue-500";
+  const border = isDarkMode ? "border-gray-300" : "border-gray-800";
+
+  const [revealSignature, setRevealSignature] = useState(false);
+  const [started, setStarted] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
   const sectionRef = useRef(null);
 
-  const fullText = `Butt Networks delivers secure, high-performance, and innovative networking solutions for businesses and individuals. We combine expertise with creativity to ensure reliable, scalable, and future-ready systems — connecting people and ideas through seamless technology.`;
+  const copyText = COPY_VARIANTS[copyVariant] || COPY_VARIANTS.professional;
 
-  // Detect when About section is visible
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const onChange = () => setReducedMotion(mq.matches);
+    mq.addEventListener?.("change", onChange);
+
+    const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasStarted) {
-            setHasStarted(true);
+          if (entry.isIntersecting && !started) {
+            setStarted(true);
           }
         });
       },
       { threshold: 0.3 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) obs.observe(sectionRef.current);
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
+      mq.removeEventListener?.("change", onChange);
+      if (sectionRef.current) obs.unobserve(sectionRef.current);
     };
-  }, [hasStarted]);
+  }, [started]);
+
+  const countersActive = started && !reducedMotion;
+  const uptime = useCountUp(countersActive, statsInitial[0].value, 1000);
+  const throughput = useCountUp(countersActive, statsInitial[1].value, 1000);
+  const clients = useCountUp(countersActive, statsInitial[2].value, 1200);
+
+  const handleTypeDone = useCallback(() => {
+    if (!reducedMotion) {
+      setTimeout(() => setRevealSignature(true), 400);
+    } else {
+      setRevealSignature(true);
+    }
+  }, [reducedMotion]);
 
   return (
     <section
       ref={sectionRef}
       id="about"
-      className="mt-15 py-16 px-6 transition-colors cursor-pointer duration-300"
+      aria-labelledby="about-heading"
+      className={`mt-16 py-16 px-6 rounded-lg shadow-sm transition-colors duration-200 ${sectionBg}`}
     >
-      <div className=" text-center">
-        {/* Heading */}
-        <h1 className="About flex items-center justify-center gap-3 font-extrabold text-[40px] text-gray-900 mb-6 tracking-wide drop-shadow-lg animate-slideDown">
-          <Network className="w-10 h-10 text-blue-400" />
-          About
-        </h1>
+      <div
+        className={`max-w-5xl mx-auto text-center border-t-[1] ${border} pt-10`}
+      >
+        <header className="flex items-center justify-center gap-3 mb-6">
+          <Network className={`w-10 h-10 ${iconColor}`} aria-hidden="true" />
+          <h2
+            id="about-heading"
+            className={`text-4xl font-extrabold ${titleText}`}
+          >
+            About
+          </h2>
+        </header>
 
-        {/* Typewriter text */}
-        {hasStarted && (
-          <p className="About-text text-lg text-gray-700 leading-relaxed animate-fadeIn delay-200 whitespace-pre-line">
-            <Typewriter
-              words={[fullText]}
-              cursor
-              cursorStyle="|"
-              typeSpeed={30}
-              deleteSpeed={0}
-              delaySpeed={1000}
-              onLoopDone={() => setShowSignature(true)}
+        <div className="mx-auto max-w-3xl">
+          {!started && (
+            <p
+              className={`text-lg leading-relaxed min-h-[56px] ${subtitleText}`}
             />
-          </p>
-        )}
+          )}
 
-        {/* Signature */}
-        {showSignature && (
-          <div className="mt-4 text-right text-gray-700 italic opacity-0 animate-fadeInSlow">
-            — From Our CEO
-          </div>
-        )}
+          {started && !reducedMotion ? (
+            <p
+              className={`text-lg leading-relaxed whitespace-pre-line ${subtitleText}`}
+              aria-live="polite"
+            >
+              <Typewriter
+                words={[copyText]}
+                cursor
+                cursorStyle="|"
+                typeSpeed={28}
+                deleteSpeed={0}
+                delaySpeed={1000}
+                onLoopDone={handleTypeDone}
+                loop={1}
+              />
+            </p>
+          ) : (
+            <p className={`text-lg leading-relaxed ${subtitleText}`}>
+              {copyText}
+            </p>
+          )}
 
-        {/* Feature icons */}
+          {revealSignature && (
+            <div className={`mt-4 text-right italic ${subtitleText}`}>
+              — From Our CEO
+            </div>
+          )}
+        </div>
+
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {[
+            "Real-World Practice",
+            "Modern Web Stack",
+            "Team Collaboration",
+          ].map((title, idx) => (
+            <div
+              key={idx}
+              className={`p-5 rounded-xl ${cardInnerBg} border ${borderClass} shadow-sm transition hover:shadow-md`}
+            >
+              <div className={`text-lg font-semibold ${titleText}`}>
+                {title}
+              </div>
+              <p className={`mt-1 text-sm ${subtitleText}`}>
+                {title === "Real-World Practice" &&
+                  "We build practical projects to learn how modern applications work in real scenarios."}
+                {title === "Modern Web Stack" &&
+                  "Next.js, React, Node.js, Tailwind, Docker, Linux, and cloud fundamentals."}
+                {title === "Team Collaboration" &&
+                  "We work together like a small product team — planning, building, and reviewing."}
+              </p>
+            </div>
+          ))}
+        </div>
+
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          <div className="About-Container flex flex-col items-center p-4 bg-gray-200 rounded-xl hover:bg-gray-300 transition">
-            <ShieldCheck className="w-10 h-10 text-green-400 mb-3" />
-            <h3 className="About-Container-Text text-gray-800 font-semibold">Secure Solutions</h3>
+          <FeatureCard
+            Icon={ShieldCheck}
+            title="Secure Solutions"
+            desc="End-to-end encrypted and audited."
+            colorClass="text-green-400"
+            isDarkMode={isDarkMode}
+          />
+          <FeatureCard
+            Icon={Cpu}
+            title="High Performance"
+            desc="Optimized routing & low latency."
+            colorClass="text-purple-400"
+            isDarkMode={isDarkMode}
+          />
+          <FeatureCard
+            Icon={Lightbulb}
+            title="Innovative Ideas"
+            desc="Product design + network automation."
+            colorClass="text-yellow-400"
+            isDarkMode={isDarkMode}
+          />
+          <FeatureCard
+            Icon={Network}
+            title="Reliable Networks"
+            desc="Redundancy and proactive monitoring."
+            colorClass="text-blue-400"
+            isDarkMode={isDarkMode}
+          />
+        </div>
+
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
+          <div className="sm:col-span-2">
+            <h3 className={`text-lg font-semibold ${titleText}`}>
+              Meet the team
+            </h3>
+            <p className={`text-sm ${subtitleText}`}>
+              A compact, cross-disciplinary team that blends infrastructure
+              engineering with design & content.
+            </p>
+
+            <div className="mt-4 flex items-center gap-3 justify-center">
+              <TeamAvatar
+                name="Shahnawaz Saddam"
+                role="Frontend-Focused Full-Stack Developer"
+                isDarkMode={isDarkMode}
+              />
+              <TeamAvatar
+                name="Wahb Amir"
+                role="Full-Stack & Systems Architect"
+                isDarkMode={isDarkMode}
+              />
+            </div>
           </div>
-          <div className="About-Container flex flex-col items-center p-4 bg-gray-200 rounded-xl hover:bg-gray-300 transition">
-            <Cpu className="w-10 h-10 text-purple-400 mb-3" />
-            <h3 className="About-Container-Text text-gray-800 font-semibold">High Performance</h3>
-          </div>
-          <div className="About-Container flex flex-col items-center p-4 bg-gray-200 rounded-xl hover:bg-gray-300 transition">
-            <Lightbulb className="w-10 h-10 text-yellow-400 mb-3" />
-            <h3 className="About-Container-Text text-gray-700 font-semibold">Innovative Ideas</h3>
-          </div>
-          <div className="About-Container flex flex-col items-center p-4 bg-gray-200 rounded-xl hover:bg-gray-300 transition">
-            <Network className="w-10 h-10 text-blue-400 mb-3" />
-            <h3 className="About-Container-Text text-gray-700 font-semibold">Reliable Networks</h3>
+
+          <div className="mt-4 sm:mt-0 flex gap-3 justify-center sm:justify-end">
+            <Link
+              href="/About"
+              className="inline-flex items-center px-5 py-2 bg-blue-600 text-white font-semibold rounded-xl shadow hover:bg-blue-700 transition"
+              aria-label="Explore our blogs"
+            >
+              Explore Our Blogs
+            </Link>
           </div>
         </div>
-        <Link href='/About'>
-        <button className="mt-6 px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow hover:bg-blue-700 transition"
-              type="button">Explore Our Blogs</button>
-              </Link>
       </div>
     </section>
   );
 };
+
+function FeatureCard({ Icon, title, desc, colorClass, isDarkMode }) {
+  const cardBg = isDarkMode ? "bg-gray-900" : "bg-gray-100";
+  const borderClass = isDarkMode ? "border-gray-700" : "border-gray-200";
+  const titleText = isDarkMode ? "text-gray-200" : "text-gray-800";
+  const subtitleText = isDarkMode ? "text-gray-400" : "text-gray-600";
+
+  return (
+    <div
+      className={`flex flex-col items-center p-4 rounded-xl ${cardBg} border ${borderClass} shadow-sm transition hover:shadow-md`}
+    >
+      <Icon className={`w-10 h-10 mb-3 ${colorClass}`} aria-hidden="true" />
+      <h4 className={`${titleText} font-semibold`}>{title}</h4>
+      <p className={`${subtitleText} text-sm mt-1`}>{desc}</p>
+    </div>
+  );
+}
+
+function TeamAvatar({ name, role, isDarkMode }) {
+  const initials = name
+    .split(" ")
+    .map((n) => n[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+  const avatarBg = isDarkMode
+    ? "bg-gradient-to-r from-blue-700 to-indigo-800"
+    : "bg-gradient-to-r from-blue-400 to-indigo-500";
+  const nameText = isDarkMode ? "text-gray-200" : "text-gray-900";
+  const roleText = isDarkMode ? "text-gray-400" : "text-gray-500";
+
+  return (
+    <div
+      className={`flex items-center gap-3 border ${
+        isDarkMode ? "border-gray-700" : "border-gray-100"
+      } rounded-xl p-2`}
+    >
+      <div
+        className={`w-12 h-12 flex items-center justify-center rounded-full ${avatarBg} text-white font-bold`}
+      >
+        {initials}
+      </div>
+      <div className="text-left">
+        <div className={`text-sm font-medium ${nameText}`}>{name}</div>
+        <div className={`text-xs ${roleText}`}>{role}</div>
+      </div>
+    </div>
+  );
+}
 
 export default About;

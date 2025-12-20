@@ -1,81 +1,426 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
+import { useTheme } from "./ThemeProvider";
 
-const Home_ = () => {
+const container = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06 } },
+};
+const fadeUp = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+};
+
+export default function Hero() {
+  // projects now include both light and dark image variants
+  const projects = [
+    { src: "/projects/Ecom/light-shop.png", title: "(E-commerce)" },
+    { src: "/projects/Platform/Dashboard.png", title: "Admin Dashboard" },
+    { src: "/projects/Digital/Near-footer.png", title: "Marketing Landing" },
+    { src: "/projects/Portfolio/home.png", title: "Custom Portfolio" },
+  ];
+
+  const scrollerRef = useRef(null);
+  const [paused, setPaused] = useState(false);
+  const { isDarkMode } = useTheme();
+
+  // pointer / drag refs
+  const isPointerDownRef = useRef(false);
+  const startXRef = useRef(0);
+  const startScrollLeftRef = useRef(0);
+  const userDraggingRef = useRef(false);
+  const resumeTimeoutRef = useRef(null);
+
+  // auto-scroll speed (px/sec) — tweak as needed
+  const SPEED = 30;
+
+  // RAF-driven auto-scroll (time-corrected)
+  useEffect(() => {
+    let rafId = 0;
+    let lastTime = 0;
+
+    function step(time) {
+      if (!lastTime) lastTime = time;
+      const deltaSec = (time - lastTime) / 1000;
+      lastTime = time;
+
+      const el = scrollerRef.current;
+      if (el && !paused && !userDraggingRef.current) {
+        el.scrollLeft += SPEED * deltaSec;
+        // continuous-loop trick (we rendered items twice)
+        if (el.scrollLeft >= el.scrollWidth / 2) {
+          el.scrollLeft -= el.scrollWidth / 2;
+        }
+      }
+
+      rafId = requestAnimationFrame(step);
+    }
+
+    rafId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(rafId);
+  }, [paused]);
+
+  // pointer/touch handlers
+  const handlePointerDown = (e) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    isPointerDownRef.current = true;
+    const clientX = e.clientX ?? (e.touches && e.touches[0]?.clientX) ?? 0;
+    startXRef.current = clientX;
+    startScrollLeftRef.current = el.scrollLeft;
+    userDraggingRef.current = false;
+    setPaused(true);
+
+    if (e.pointerId && el.setPointerCapture) {
+      try {
+        el.setPointerCapture(e.pointerId);
+      } catch (err) {}
+    }
+
+    if (resumeTimeoutRef.current) {
+      clearTimeout(resumeTimeoutRef.current);
+      resumeTimeoutRef.current = null;
+    }
+  };
+
+  const handlePointerMove = (e) => {
+    if (!isPointerDownRef.current) return;
+    const el = scrollerRef.current;
+    if (!el) return;
+
+    const clientX = e.clientX ?? (e.touches && e.touches[0]?.clientX) ?? 0;
+    const clientY = e.clientY ?? (e.touches && e.touches[0]?.clientY) ?? 0;
+    const dx = clientX - startXRef.current;
+
+    if (!userDraggingRef.current && Math.abs(dx) > 6)
+      userDraggingRef.current = true;
+
+    if (userDraggingRef.current) {
+      el.scrollLeft = startScrollLeftRef.current - dx;
+
+      // attempt to prevent vertical scroll when horizontal drag is dominant
+      if (
+        Math.abs(dx) > Math.abs((e.clientY ?? 0) - clientY) &&
+        e.preventDefault
+      ) {
+        try {
+          e.preventDefault();
+        } catch (err) {}
+      }
+    }
+  };
+
+  const handlePointerUp = (e) => {
+    const el = scrollerRef.current;
+    isPointerDownRef.current = false;
+    userDraggingRef.current = false;
+
+    if (e?.pointerId && el?.releasePointerCapture) {
+      try {
+        el.releasePointerCapture(e.pointerId);
+      } catch (err) {}
+    }
+
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+    resumeTimeoutRef.current = setTimeout(() => {
+      setPaused(false);
+      resumeTimeoutRef.current = null;
+    }, 900);
+  };
+
+  // hover/focus handlers
+  const handleMouseEnter = () => setPaused(true);
+  const handleMouseLeave = () => {
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+    resumeTimeoutRef.current = setTimeout(() => setPaused(false), 350);
+  };
+  const handleTouchStart = (e) => handlePointerDown(e);
+  const handleTouchMove = (e) => handlePointerMove(e);
+  const handleTouchEnd = (e) => handlePointerUp(e);
+  const handleFocus = () => setPaused(true);
+  const handleBlur = () => setPaused(false);
+
+  useEffect(() => {
+    return () => {
+      if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+    };
+  }, []);
+
+  // helper: pick right classes depending on theme
+  const cardBg = isDarkMode ? "bg-gray-800" : "bg-gray-100";
+  const cardInnerBg = isDarkMode ? "bg-gray-900" : "bg-white";
+  const titleText = isDarkMode ? "text-gray-200" : "text-gray-700";
+  const subtitleText = isDarkMode ? "text-gray-400" : "text-gray-700";
+  const sectionBg = isDarkMode ? "bg-gray-900/60" : "bg-white/60";
+
   return (
     <section
       id="home"
-      className="mt-30 w-full flex flex-col justify-center items-center text-center px-4 cursor-default"
+      aria-label="Home — Hero"
+      className={`relative overflow-hidden ${sectionBg} py-10 sm:py-16 mt-18 md:mt-22 lg:mt-24 xl:mt-24`}
     >
-      {/* Heading */}
-      <motion.h1
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        className="Home font-extrabold text-4xl md:text-6xl text-gray-900"
-      >
-        Welcome to <span className="text-blue-600">Butt Networks</span>
-      </motion.h1>
+      <div className="pointer-events-none absolute inset-0 -z-10 hidden md:block">
+        <div className="m-auto w-[1200px] max-w-full">
+          <div
+            aria-hidden
+            className="absolute -right-20 top-0 w-[520px] h-[520px] rounded-full bg-gradient-to-tr from-blue-400 to-indigo-500 opacity-18 blur-3xl transform-gpu"
+          />
+        </div>
+      </div>
 
-      {/* Typewriter Text */}
-      <motion.h2
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.7 }}
-        className="Home-Text mt-4 text-xl md:text-3xl font-semibold text-gray-700"
-      >
-        <Typewriter
-          words={[
-            "Professional Web Development",
-            "React & Next.js Expert",
-            "Modern UI/UX Designs",
-            "Fast, Secure & Optimized Websites",
-          ]}
-          loop={true}
-          cursor
-          cursorStyle="|"
-          typeSpeed={60}
-          deleteSpeed={40}
-          delaySpeed={1500}
-        />
-      </motion.h2>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+          {/* LEFT */}
+          <motion.div
+            initial="hidden"
+            animate="show"
+            variants={container}
+            className="text-center lg:text-left"
+          >
+            <motion.h1
+              variants={fadeUp}
+              className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight ${
+                isDarkMode ? "text-white" : "text-gray-900"
+              }`}
+            >
+              <span className="block">
+                Wahb <span className="text-gray-400"> & </span>{" "}
+                <span className="text-blue-600">Shahnawaz</span>
+              </span>
+              <span
+                className={`block mt-2 text-lg sm:text-xl font-semibold ${subtitleText}`}
+              >
+                Collaborative design + development
+              </span>
+            </motion.h1>
 
-      {/* Description */}
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.7 }}
-        className="Home max-w-2xl mt-6 text-gray-600 text-base md:text-lg"
-      >
-        We build fast, secure & high-performance websites for businesses,
-        startups & personal brands — with modern technologies and elegant UI.
-      </motion.p>
+            <motion.div
+              variants={fadeUp}
+              className={`mt-4 text-base sm:text-lg ${subtitleText} max-w-xl mx-auto lg:mx-0`}
+            >
+              <Typewriter
+                words={[
+                  "Design systems & component libraries",
+                  "React & Next.js architecture",
+                  "Polished UI/UX for startups",
+                  "Performance-first production builds",
+                ]}
+                loop={0}
+                cursor
+                cursorStyle="|"
+                typeSpeed={45}
+                deleteSpeed={30}
+                delaySpeed={1200}
+              />
+            </motion.div>
 
-      {/* CTA Buttons */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.3, duration: 0.7 }}
-        className="mt-8 flex gap-4"
-      >
-        <Link href='#services'>
-        <button className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl shadow hover:bg-blue-700 transition">
-          Our Services
-        </button>
-        </Link>
+            <motion.p
+              variants={fadeUp}
+              className={`mt-4 ${subtitleText} max-w-lg mx-auto lg:mx-0`}
+            >
+              Together, we deliver quick, user-friendly, and enjoyable online
+              experiences by fusing front-end development with visual design.
+            </motion.p>
 
-        <Link href="/contact">
-        <button className="Home px-6 py-3 border border-gray-400 text-gray-600 font-semibold rounded-xl hover:bg-gray-400 transition">
-          Contact Us
-        </button>
-        </Link>
+            <motion.div
+              variants={fadeUp}
+              className="mt-6 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 justify-center lg:justify-start"
+            >
+              <Link
+                href="#services"
+                aria-label="See our services"
+                className="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-blue-600 text-white font-semibold shadow hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300"
+              >
+                Our Services
+                <svg
+                  className="ml-3 -mr-1 h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden
+                >
+                  <path
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5 12h14M12 5l7 7-7 7"
+                  />
+                </svg>
+              </Link>
 
-      </motion.div>
+              <Link
+                href="/contact"
+                className={`inline-flex items-center justify-center px-5 py-3 rounded-xl border ${
+                  isDarkMode
+                    ? "border-gray-700 text-white"
+                    : "border-gray-300 text-gray-700"
+                } font-semibold hover:bg-gray-100 transition`}
+              >
+                Contact Us
+              </Link>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              className="mt-4 flex gap-4 justify-center lg:justify-start text-sm"
+            >
+              <a href="/#projects" className={`underline ${subtitleText}`}>
+                See our work
+              </a>
+              <span aria-hidden className={subtitleText}>
+                ·
+              </span>
+              <a href="/#founder" className={`underline ${subtitleText}`}>
+                About the team
+              </a>
+            </motion.div>
+          </motion.div>
+
+          {/* RIGHT */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.06 }}
+            className="flex justify-center lg:justify-end lg:pt-2 xl:pt-4"
+          >
+            <div className="w-full max-w-md">
+              <div className="flex items-center gap-4">
+                <div className="relative">
+                  <div
+                    className={`w-14 h-14 sm:w-20 sm:h-20 rounded-full ring-4 ${
+                      isDarkMode ? "ring-gray-900" : "ring-white"
+                    } overflow-hidden shadow-lg`}
+                  >
+                    <Image
+                      src="/butt.png"
+                      alt="Avatar"
+                      width={80}
+                      height={80}
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <div
+                    className={`text-sm font-medium ${
+                      isDarkMode ? "text-white" : "text-gray-900"
+                    }`}
+                  >
+                    Wahb & Shahnawaz
+                  </div>
+                  <div className={`text-xs ${subtitleText}`}>
+                    Design + Frontend Engineering
+                  </div>
+                  <div
+                    className={`mt-2 inline-flex items-center gap-2 text-xs ${subtitleText}`}
+                  >
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      aria-hidden
+                    >
+                      <path
+                        d="M12 2v20M2 12h20"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      />
+                    </svg>
+                    <span>Based in — Asia</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="hidden sm:grid mt-6 grid-cols-2 gap-3">
+                {projects.map((p, idx) => (
+                  <a
+                    key={idx}
+                    className={`group relative block overflow-hidden rounded-lg ${cardBg} shadow-sm`}
+                    href="/#projects"
+                    aria-label={`Open project ${p.title}`}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                  >
+                    <div className={`relative aspect-[4/3] ${cardInnerBg}`}>
+                      <Image
+                        src={p.src}
+                        alt={p.title}
+                        fill
+                        className="object-contain p-3"
+                        sizes="(max-width: 640px) 60vw, (max-width: 1024px) 40vw, 25vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/32 via-transparent opacity-0 group-hover:opacity-60 transition-opacity pointer-events-none" />
+                    </div>
+
+                    <div className={`p-2 text-xs ${titleText}`}>{p.title}</div>
+                  </a>
+                ))}
+              </div>
+
+              {/* MOBILE / SMALL: continuous loop scroller */}
+              <div className="sm:hidden mt-6">
+                <div
+                  ref={scrollerRef}
+                  className="flex gap-3 overflow-x-auto whitespace-nowrap"
+                  style={{
+                    WebkitOverflowScrolling: "touch",
+                  }}
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
+                  onPointerDown={handlePointerDown}
+                  onPointerMove={handlePointerMove}
+                  onPointerUp={handlePointerUp}
+                  onPointerCancel={handlePointerUp}
+                >
+                  {[...projects, ...projects].map((p, idx) => (
+                    <a
+                      key={idx}
+                      className={`group relative block overflow-hidden rounded-lg ${cardBg} shadow-sm min-w-[220px] flex-shrink-0`}
+                      href="/#projects"
+                      aria-label={`Open project ${p.title}`}
+                      onFocus={handleFocus}
+                      onBlur={handleBlur}
+                    >
+                      <div className={`relative aspect-[4/3] ${cardInnerBg}`}>
+                        <Image
+                          src={p.src}
+                          alt={p.title}
+                          fill
+                          className="object-contain p-3"
+                          sizes="200px"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/32 via-transparent opacity-0 group-hover:opacity-60 transition-opacity pointer-events-none" />
+                      </div>
+
+                      <div className={`p-2 text-xs ${titleText}`}>
+                        {p.title}
+                      </div>
+                    </a>
+                  ))}
+                </div>
+
+                <div
+                  className={`mt-2 flex items-center justify-between text-xs ${subtitleText}`}
+                >
+                  <div>{paused ? "Paused" : "Auto-scrolling"}</div>
+                  <div className="text-right">
+                    Swipe to interact • Tap to open
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
     </section>
   );
-};
-
-export default Home_;
+}

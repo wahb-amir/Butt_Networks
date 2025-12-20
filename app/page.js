@@ -2,7 +2,7 @@ import Home_ from "./components/Home";
 import About from "./components/About";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
-import Ceo from "./components/Ceo";
+import Founder from "./components/Founder";
 import Offer from "./components/Offer";
 import Services from "./components/Services";
 import Quiz_App from "./components/Quiz-App";
@@ -15,11 +15,10 @@ export default function Home() {
       <About />
       <Skills />
       <Services />
-       {/* how many projects to show on home page */}
       <Projects limit={3} />
       <MakeWeb />
       <Quiz_App />
-      <Ceo />
+      <Founder />
       <Offer />
     </>
   );
