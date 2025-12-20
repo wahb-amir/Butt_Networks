@@ -23,6 +23,9 @@ const Footer = () => {
           <p className=" flex items-center justify-center md:justify-start gap-4 mt-2">
             <FaEnvelope /> shahnawazsaddamb@gmail.com
           </p>
+          <p className=" flex items-center justify-center md:justify-start gap-4 mt-2">
+            <FaEnvelope /> wahbamir2010@gmail.com
+          </p>
           <p className="flex items-center justify-center md:justify-start gap-2 mt-2">
             <FaPhone /> +92 300 4907243
           </p>

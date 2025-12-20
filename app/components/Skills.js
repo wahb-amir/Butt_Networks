@@ -1,12 +1,8 @@
 "use client";
-import React from "react";
-import {
-  FaNodeJs,
-  FaReact,
-  FaPython,
-  FaLinux,
-} from "react-icons/fa";
 
+import React from "react";
+import { FaNodeJs, FaReact, FaPython, FaLinux } from "react-icons/fa";
+import { useTheme } from "./ThemeProvider";
 import {
   SiTailwindcss,
   SiJavascript,
@@ -14,140 +10,162 @@ import {
   SiMongodb,
   SiNextdotjs,
   SiC,
-  SiTensorflow,
-  SiReact,
+  SiCplusplus,
+  SiScikitlearn,
+  SiTypescript,
+  SiPytorch,
 } from "react-icons/si";
 
-// Swiper imports
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+/* Core tools – shown ONCE */
+const CORE_STACK = [
+  { name: "TypeScript", icon: <SiTypescript className="text-blue-500" /> },
+  { name: "React", icon: <FaReact className="text-cyan-400" /> },
+  {
+    name: "Next.js",
+    icon: <SiNextdotjs className="text-neutral-800 dark:text-black" />,
+  },
+  { name: "Node.js", icon: <FaNodeJs className="text-green-600" /> },
+  { name: "Tailwind CSS", icon: <SiTailwindcss className="text-sky-500" /> },
+];
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-
-const stack = [
-  { 
-    name: "JavaScript", 
-    icon: <SiJavascript className="text-yellow-400" />, 
-    progress: 70,
-    desc: "Core language for web interactivity and app logic."
+/* Capabilities – tools appear ONCE, in context */
+const CAPABILITIES = [
+  {
+    title: "Frontend Web Apps",
+    desc: "Responsive, accessible interfaces with modern React patterns.",
+    tools: [
+      { name: "React", icon: <FaReact className="text-cyan-400" /> },
+      {
+        name: "Next.js",
+        icon: <SiNextdotjs className="text-neutral-800 dark:text-black" />
+      },
+      {
+        name: "Tailwind CSS",
+        icon: <SiTailwindcss className="text-sky-500" />,
+      },
+      {
+        name: "JavaScript",
+        icon: <SiJavascript className="text-yellow-400" />,
+      },
+    ],
   },
-  { 
-    name: "Tailwind CSS", 
-    icon: <SiTailwindcss className="text-sky-500" />, 
-    progress: 75,
-    desc: "Utility-first CSS framework for responsive designs."
+  {
+    title: "Backend APIs",
+    desc: "REST APIs and application backends.",
+    tools: [
+      { name: "Node.js", icon: <FaNodeJs className="text-green-600" /> },
+      { name: "Express", icon: <SiExpress className="text-gray-700" /> },
+    ],
   },
-  { 
-    name: "Node.js", 
-    icon: <FaNodeJs className="text-green-600" />, 
-    progress: 80,
-    desc: "JavaScript runtime for scalable backend systems."
+  {
+    title: "Databases",
+    desc: "Flexible data models for web apps.",
+    tools: [
+      { name: "MongoDB", icon: <SiMongodb className="text-green-700" /> },
+    ],
   },
-  { 
-    name: "Express.js", 
-    icon: <SiExpress className="text-gray-700" />, 
-    progress: 75,
-    desc: "Minimalist backend framework for Node.js APIs."
+  {
+    title: "Mobile Apps",
+    desc: "Cross-platform apps for Android and iOS.",
+    tools: [
+      { name: "React Native", icon: <FaReact className="text-cyan-500" /> },
+    ],
   },
-  { 
-    name: "MongoDB", 
-    icon: <SiMongodb className="text-green-700" />, 
-    progress: 70,
-    desc: "NoSQL database for flexible and fast data storage."
+  {
+    title: "DevOps & Systems",
+    desc: "Deploying and running applications.",
+    tools: [{ name: "Linux", icon: <FaLinux className="text-gray-800" /> }],
   },
-  { 
-    name: "React.js", 
-    icon: <FaReact className="text-cyan-400" />, 
-    progress: 78,
-    desc: "Library for creating interactive UIs and components."
+  {
+    title: "ML & Experiments",
+    desc: "Exploration and prototyping with data.",
+    tools: [
+      { name: "Python", icon: <FaPython className="text-blue-700" /> },
+      {
+        name: "Scikit-Learn",
+        icon: <SiScikitlearn className="text-orange-400" />,
+      },
+      { name: "PyTorch", icon: <SiPytorch className="text-orange-400" /> },
+    ],
   },
-  { 
-    name: "Next.js", 
-    icon: <SiNextdotjs className="text-black" />, 
-    progress: 78,
-    desc: "React framework for SSR and full-stack apps."
-  },
-  { 
-    name: "React Native", 
-    icon: <SiReact className="text-cyan-500" />, 
-    progress: 65,
-    desc: "Platform for apps framework for iOS and Android."
-  },
-  { 
-    name: "Python", 
-    icon: <FaPython className="text-blue-700" />, 
-    progress: 80,
-    desc: "Versatile language for web, AI, and automation."
-  },
-  { 
-    name: "Scikit-Learn (ML)", 
-    icon: <SiTensorflow className="text-orange-400" />, 
-    progress: 45,
-    desc: "Machine learning library for building models."
-  },
-  { 
-    name: "Linux", 
-    icon: <FaLinux className="text-gray-800 " />, 
-    progress: 70,
-    desc: "For deploying and managing applications securely."
-  },
-  { 
-    name: "C Language", 
-    icon: <SiC className="text-blue-800" />, 
-    progress: 60,
-    desc: "Low-level language for system and performance apps."
+  {
+    title: "Systems / Low-level",
+    desc: "Performance-oriented and systems work.",
+    tools: [
+      { name: "C", icon: <SiC className="text-blue-800" /> },
+      { name: "C++", icon: <SiCplusplus className="text-blue-600" /> },
+    ],
   },
 ];
 
-const Skills = () => {
+export default function Skills() {
+  const { isDarkMode } = useTheme?.() ?? { isDarkMode: false };
+
+  // Theme classes (from your example)
+  const cardBg = isDarkMode ? "bg-gray-800" : "bg-gray-100";
+  const cardInnerBg = isDarkMode ? "bg-gray-800" : "bg-gray-100";
+  const titleText = isDarkMode ? "text-gray-200" : "text-gray-700";
+  const subtitleText = isDarkMode ? "text-gray-400" : "text-gray-600";
+  const sectionBg = isDarkMode ? "bg-gray-900/60" : "bg-white/60";
+  const borderClass = isDarkMode ? "border-gray-700" : "border-gray-100";
+
   return (
-    <section className="Skills py-10 px-5 mt-20 bg-transparent" id="skills">
-      <h1 className="text-4xl font-bold text-center mb-10 flex items-center justify-center gap-3 text-gray-800">
-        <span role="img" aria-label="briefcase">
-          💼
-        </span>
-        Tech Stack
-      </h1>
+    <section
+      className={`py-12 px-5 mt-20 transition-colors duration-200 ${sectionBg}`}
+      id="skills"
+    >
+      <div className="max-w-5xl mx-auto">
+        <h2 className={`text-3xl font-bold text-center mb-3 ${titleText}`}>
+          What We Build
+        </h2>
+        <p
+          className={`text-center text-sm mb-6 max-w-3xl mx-auto ${subtitleText}`}
+        >
+          Our core tools and the types of systems we build with them.
+        </p>
 
-      <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={20}
-        slidesPerView={1}
-        navigation
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 2500, disableOnInteraction: false }}
-        breakpoints={{
-          640: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-          1280: { slidesPerView: 4 },
-        }}
-        className="max-w-6xl mx-auto"
-      >
-        {stack.map((item, index) => (
-          <SwiperSlide key={index}>
-            <div className="SkillsBox bg-gray-100 shadow-lg rounded-xl p-6 flex flex-col items-center gap-3 transition-transform duration-300 hover:scale-105 cursor-pointer">
-              <div className="text-5xl">{item.icon}</div>
-              <p className="text-xl font-semibold text-gray-900">{item.name}</p>
-              <p className="text-sm text-gray-600 text-center">{item.desc}</p>
-
-              {/* Progress bar */}
-              <div className="w-full bg-gray-200 rounded-full h-3 mt-2 relative overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full transition-all duration-700"
-                  style={{ width: `${item.progress}%` }}
-                />
-                <span className="absolute inset-0 flex justify-center items-center text-xs font-semibold text-white">
-                  {item.progress}%
-                </span>
-              </div>
+        {/* Core Stack */}
+        <div className="flex flex-wrap justify-center gap-4 mb-8">
+          {CORE_STACK.map((item) => (
+            <div
+              key={item.name}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full ${cardBg} ${borderClass} transition-colors duration-200`}
+            >
+              <span className="text-lg">{item.icon}</span>
+              <span className={`text-sm font-medium ${titleText}`}>
+                {item.name}
+              </span>
             </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+          ))}
+        </div>
+
+        {/* Capabilities */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 shadow-2xl rounded-2xl">
+          {CAPABILITIES.map((cap) => (
+            <article
+              key={cap.title}
+              className={`p-4 rounded-xl ${cardInnerBg} ${borderClass} shadow-sm transition-shadow hover:shadow-md m-2`}
+            >
+              <h3 className={`text-base font-semibold ${titleText}`}>
+                {cap.title}
+              </h3>
+              <p className={`text-sm mt-1 mb-3 ${subtitleText}`}>{cap.desc}</p>
+
+              <div className="flex flex-wrap gap-3">
+                {cap.tools.map((tool) => (
+                  <div
+                    key={tool.name}
+                    className={`flex items-center gap-2 px-2 py-1 rounded-md ${cardBg} ${borderClass} ${subtitleText} text-sm transition-colors duration-200`}
+                  >
+                    <span className="text-base">{tool.icon}</span>
+                    <span className={`${titleText}`}>{tool.name}</span>
+                  </div>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
     </section>
   );
-};
-
-export default Skills;
+}
