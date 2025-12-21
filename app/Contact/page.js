@@ -10,11 +10,11 @@ const CONTACT_EMAILS = [
   "wahbamir2010@gmail.com",
   "dev.buttnetworks@gmail.com",
 ];
-const CLIENT_PORTAL = process.env.NEXT_PUBLIC_CONTACT_PLATFORM || "#";
+const CLIENT_PORTAL = "https://dashboard.wahb.space" || "#";
 const CLIENT_QUOTE = `${CLIENT_PORTAL}#request-quote`;
 
 const teamGitHub = [
-  { name: "Wahb Amir", url: "https://github.com/coder101-js" },
+  { name: "Wahb Amir", url: "https://github.com/wahb-amir" },
   { name: "Shahanwaz", url: "https://github.com/ShahanwazSaddam144" },
 ];
 
