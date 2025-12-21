@@ -41,7 +41,7 @@ export const projects = [
     description:
       "A polished portfolio featuring a contact workflow, Dark Mode, and a full-stack build for content management and smooth client updates.",
     demoLink: "https://syedzeeshanhaider.netlify.app/",
-    githubLink: "https://github.com/coder101-js/Zeeshan",
+    githubLink: "https://github.com/wahb-amir/Zeeshan",
     images: [
       "/projects/Portfolio/home.png",
       "/projects/Portfolio/main.png",
@@ -72,14 +72,14 @@ export const projects = [
     heading: "Client–Dev Collaboration Platform",
     description:
       "A unified platform connecting clients and development teams — request quotes, receive email alerts, view project progress & assignees, chat with developers, and automatically sync GitHub repo activity to project status.",
-    demoLink: "https://projects.buttnetworks.com",
+    demoLink: "https://dashboard.wahb.space",
     githubLink: [
       {
-        url: "https://github.com/coder101-js/dev-dashboard",
+        url: "https://github.com/wahb-amir/dev-dashboard",
         name: "Client App",
       },
       {
-        url: "https://github.com/coder101-js/dashboard",
+        url: "https://github.com/wahb-amir/dashboard",
         name: "Developer App",
       },
     ],
@@ -162,7 +162,7 @@ export const projects = [
     description:
       "A safe, ready-to-use online store with JWT authentication, Stripe payments, and persistent cart syncing across devices.",
     demoLink: "https://boltform.buttnetworks.com/",
-    githubLink: "https://github.com/coder101-js/Ecommer-Store",
+    githubLink: "https://github.com/wahb-amir/Ecommer-Store",
     images: [
       "/projects/Ecom/light-shop.png",
       "/projects/Ecom/light-men.png",
@@ -188,31 +188,31 @@ export const projects = [
     ],
     priority: 8,
   },
-//   {
-//     id: "note-pad",
-//     heading: "Note Pad",
-//     description:
-//       "Built with Python and Tkinter, this lightweight desktop notepad is packaged as a Windows executable, opens quickly, and supports simple formatting.",
-//     demoLink: "/notepad.exe",
-//     githubLink: null,
-//     images: ["/project.png", "/project.png"],
-//     tech: ["Python", "Tkinter", "PyInstaller"],
-//     authors: [
-//       {
-//         name: "Shahnawaz Butt",
-//         role: "Logic & Packaging",
-//         portfolio: "https://shahnawaz.buttnetworks.com",
-//       },
-//     ],
-//     startDate: null,
-//     endDate: null,
-//     status: "completed",
-//     highlights: [
-//       "Basic rich-text formatting and save/export options",
-//       "Very lightweight and fast startup",
-//       "Packaged as a portable Windows .exe",
-//     ],
-//     type: "non-web",
-//     priority: 2,
-//   },
+  //   {
+  //     id: "note-pad",
+  //     heading: "Note Pad",
+  //     description:
+  //       "Built with Python and Tkinter, this lightweight desktop notepad is packaged as a Windows executable, opens quickly, and supports simple formatting.",
+  //     demoLink: "/notepad.exe",
+  //     githubLink: null,
+  //     images: ["/project.png", "/project.png"],
+  //     tech: ["Python", "Tkinter", "PyInstaller"],
+  //     authors: [
+  //       {
+  //         name: "Shahnawaz Butt",
+  //         role: "Logic & Packaging",
+  //         portfolio: "https://shahnawaz.buttnetworks.com",
+  //       },
+  //     ],
+  //     startDate: null,
+  //     endDate: null,
+  //     status: "completed",
+  //     highlights: [
+  //       "Basic rich-text formatting and save/export options",
+  //       "Very lightweight and fast startup",
+  //       "Packaged as a portable Windows .exe",
+  //     ],
+  //     type: "non-web",
+  //     priority: 2,
+  //   },
 ];
