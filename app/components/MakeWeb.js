@@ -302,7 +302,22 @@ const MakeWeb = () => {
         ? { background: "linear-gradient(135deg,#b45309,#d97706)" }
         : { background: "linear-gradient(135deg,#be185d,#fb7185)" }
       : undefined;
+  const [copied, setCopied] = useState(false);
 
+  const handleCopy = () => {
+    const parts = [];
+    if (projectType) parts.push(PROJECTS[projectType].label);
+    if (budget) parts.push(`Budget: ${budget}`);
+    if (delivery) parts.push(`Delivery: ${delivery}`);
+    parts.push(`Estimate: ${currency.format(priceBreakdown.total)}`);
+    const text = `Project Estimate — ${parts.join(" • ")}`;
+
+    navigator?.clipboard?.writeText?.(text);
+
+    // Show toast
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000); // hide after 2 seconds
+  };
   return (
     <section
       aria-labelledby="make-project-title"
@@ -529,25 +544,22 @@ const MakeWeb = () => {
                 Get a Quote
               </button>
 
-              <button
-                type="button"
-                onClick={() => {
-                  const parts = [];
-                  if (projectType) parts.push(PROJECTS[projectType].label);
-                  if (budget) parts.push(`Budget: ${budget}`);
-                  if (delivery) parts.push(`Delivery: ${delivery}`);
-                  parts.push(
-                    `Estimate: ${currency.format(priceBreakdown.total)}`
-                  );
-                  const text = `Project Estimate — ${parts.join(" • ")}`;
-                  navigator?.clipboard?.writeText?.(text);
-                  alert("Estimate copied to clipboard!");
-                }}
-                className="py-2 px-3 rounded-md border bg-transparent text-sm"
-                disabled={!priceBreakdown.valid}
-              >
-                Copy Estimate
-              </button>
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  className="py-2 px-3 rounded-md border bg-transparent text-sm"
+                  disabled={!priceBreakdown.valid}
+                >
+                  Copy Estimate
+                </button>
+
+                {copied && (
+                  <span className="absolute top-0 right-0 mt-[-1.5rem] px-3 py-1 bg-black text-white text-xs rounded-md shadow-lg animate-fade-in-out">
+                    Copied to clipboard!
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </aside>
