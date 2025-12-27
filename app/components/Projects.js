@@ -17,7 +17,7 @@ export default function Projects({
   projects: projectsData = defaultProjects,
   heading = "Our Work",
   subHeading = "Modern, fast and built for real users",
-  single = false, // optional prop to force single-project (case study) layout
+  single = false, 
 }) {
   const sectionRef = useRef(null);
   const [visible, setVisible] = useState(false);

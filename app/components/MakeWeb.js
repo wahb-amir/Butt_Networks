@@ -211,7 +211,7 @@ const MakeWeb = () => {
         <div className="lg:col-span-2 bg-white dark:bg-gray-800 border rounded-2xl p-5 space-y-6 shadow-sm">
           {/* Project type */}
           <fieldset className="space-y-3" aria-label="Project type">
-            <legend className="text-sm uppercase font-medium opacity-85">
+            <legend className="text-sm uppercase text-white font-medium opacity-85">
               Project Type
             </legend>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
@@ -231,7 +231,7 @@ const MakeWeb = () => {
 
           {/* Budget */}
           <fieldset className="space-y-3">
-            <legend className="text-sm uppercase font-medium opacity-85">
+            <legend className="text-sm text-white uppercase font-medium opacity-85">
               Budget Range
             </legend>
             <div className="grid grid-cols-3 gap-3">
@@ -251,7 +251,7 @@ const MakeWeb = () => {
 
           {/* Delivery */}
           <fieldset className="space-y-3">
-            <legend className="text-sm uppercase font-medium opacity-85">
+            <legend className="text-sm uppercase text-white font-medium opacity-85">
               Delivery Time
             </legend>
             <div className="grid grid-cols-3 gap-3">
@@ -273,7 +273,7 @@ const MakeWeb = () => {
             <button
               type="button"
               onClick={resetAll}
-              className="py-2 px-4 rounded-md border text-sm bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+              className="py-2 px-4 rounded-md border text-white text-sm bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 transition"
             >
               Reset
             </button>

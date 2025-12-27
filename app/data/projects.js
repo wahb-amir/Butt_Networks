@@ -163,6 +163,7 @@ export const projects = [
       "A safe, ready-to-use online store with JWT authentication, Stripe payments, and persistent cart syncing across devices.",
     demoLink: "https://boltform.buttnetworks.com/",
     githubLink: "https://github.com/coder101-js/Ecommer-Store",
+    downloadLink: "BoltForm.apk",
     images: [
       "/projects/Ecom/light-shop.png",
       "/projects/Ecom/light-men.png",
@@ -176,6 +177,11 @@ export const projects = [
         name: "Wahb Amir",
         role: "Frontend & UX & Backend & Payments",
         portfolio: "https://wahb.space",
+      },
+      {
+        name: "Shahnawaz Butt",
+        role: "Mobile App",
+        portfolio: "https://shahnawaz.buttnetworks.com",
       },
     ],
     startDate: "July 19, 2025",

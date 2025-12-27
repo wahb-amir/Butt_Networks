@@ -6,7 +6,6 @@ html {
 
 body {
   transition: 0.3s background;
-  @apply bg-gray-100;
 }
 
 ::placeholder {

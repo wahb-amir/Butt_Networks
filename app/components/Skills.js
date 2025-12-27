@@ -14,6 +14,7 @@ import {
   SiScikitlearn,
   SiTypescript,
   SiPytorch,
+  SiMysql
 } from "react-icons/si";
 
 /* Core tools – shown ONCE */
@@ -62,6 +63,7 @@ const CAPABILITIES = [
     desc: "Flexible data models for web apps.",
     tools: [
       { name: "MongoDB", icon: <SiMongodb className="text-green-700" /> },
+      { name: "MySQL", icon: <SiMysql className="text-blue-600" /> },
     ],
   },
   {
