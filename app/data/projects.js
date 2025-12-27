@@ -162,12 +162,10 @@ export const projects = [
     description:
       "A safe, ready-to-use online store with JWT authentication, Stripe payments, and persistent cart syncing across devices.",
     demoLink: "https://boltform.buttnetworks.com/",
-<<<<<<< HEAD
     githubLink: "https://github.com/coder101-js/Ecommer-Store",
     downloadLink: "BoltForm.apk",
-=======
     githubLink: "https://github.com/wahb-amir/Ecommer-Store",
->>>>>>> bf61c50fb8cd668dc364fa6e6e8d991e1f8d48bb
+
     images: [
       "/projects/Ecom/light-shop.png",
       "/projects/Ecom/light-men.png",

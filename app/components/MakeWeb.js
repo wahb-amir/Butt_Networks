@@ -5,6 +5,7 @@ import { useTheme } from "./ThemeProvider";
 /* Utility: safe className joiner */
 const css = (...parts) => parts.filter(Boolean).join(" ");
 
+/* Detect old iOS Safari */
 const isOldiOSSafari = (() => {
   if (typeof navigator === "undefined") return false;
   const ua = navigator.userAgent || "";
@@ -12,18 +13,17 @@ const isOldiOSSafari = (() => {
   return /iP(hone|od|ad)/i.test(platform) && /OS 15[_\d]*/i.test(ua);
 })();
 
-/* TrafficLight: bigger, more saturated colors for light mode; outlines to avoid washout */
+/* TrafficLight component */
 const TrafficLight = ({ variant = "neutral", size = 12, activeLabel }) => {
   const map = {
-    success: { active: "#059669", inactive: "#d1d5db" }, // emerald-600, gray-300
-    mid: { active: "#b45309", inactive: "#d1d5db" }, // amber-700
-    warn: { active: "#be185d", inactive: "#d1d5db" }, // rose-600
-    neutral: { active: "#374151", inactive: "#e5e7eb" }, // gray-700 / gray-200
+    success: { active: "#059669", inactive: "#d1d5db" },
+    mid: { active: "#b45309", inactive: "#d1d5db" },
+    warn: { active: "#be185d", inactive: "#d1d5db" },
+    neutral: { active: "#374151", inactive: "#e5e7eb" },
   };
 
   const colors = map[variant] || map.neutral;
 
-  // for old Safari we use inline styles; for modern browsers we keep Tailwind classes
   const dotStyle = (active) =>
     isOldiOSSafari
       ? {
@@ -82,6 +82,7 @@ const TrafficLight = ({ variant = "neutral", size = 12, activeLabel }) => {
   );
 };
 
+/* OptionButton component */
 const OptionButton = ({
   id,
   label,
@@ -91,7 +92,6 @@ const OptionButton = ({
   variant = "neutral",
   isDarkMode,
 }) => {
-  // stronger light-mode classes: remove translucent whites and use solid backgrounds / stronger text
   const variantMap = {
     neutral: isDarkMode
       ? "bg-gray-800 border-gray-600 text-gray-200"
@@ -107,32 +107,28 @@ const OptionButton = ({
       : "bg-rose-300 text-rose-900 border-rose-600",
   };
 
-  /* Fallback styles for old Safari or inline style overrides */
   const fallbackMap = {
     neutral: {
-      backgroundColor: isDarkMode ? "#111827" : "#f3f4f6", // gray-100
-      borderColor: isDarkMode ? "#374151" : "#d1d5db", // gray-300
-      color: isDarkMode ? "#e5e7eb" : "#111827", // text-gray-900
+      backgroundColor: isDarkMode ? "#111827" : "#f3f4f6",
+      borderColor: isDarkMode ? "#374151" : "#d1d5db",
+      color: isDarkMode ? "#e5e7eb" : "#111827",
     },
     success: {
-      backgroundColor: isDarkMode ? "rgba(4,120,87,0.18)" : "#34d399", // stronger emerald
+      backgroundColor: isDarkMode ? "rgba(4,120,87,0.18)" : "#34d399",
       borderColor: "#059669",
-      color: isDarkMode ? "#d1fae5" : "#065f46", // dark green text
+      color: isDarkMode ? "#d1fae5" : "#065f46",
     },
     mid: {
-      backgroundColor: isDarkMode ? "rgba(120,53,15,0.18)" : "#fbbf24", // amber-400
+      backgroundColor: isDarkMode ? "rgba(120,53,15,0.18)" : "#fbbf24",
       borderColor: "#b45309",
-      color: isDarkMode ? "#fef3c7" : "#78350f", // dark amber text
+      color: isDarkMode ? "#fef3c7" : "#78350f",
     },
     warn: {
-      backgroundColor: isDarkMode ? "rgba(153,27,39,0.18)" : "#f43f5e", // rose-500
+      backgroundColor: isDarkMode ? "rgba(153,27,39,0.18)" : "#f43f5e",
       borderColor: "#be185d",
-      color: isDarkMode ? "#fecdd3" : "#831843", // dark rose text
+      color: isDarkMode ? "#fecdd3" : "#831843",
     },
   };
-
-  const selectedClasses =
-    "ring-2 ring-offset-1 ring-offset-white dark:ring-offset-gray-900 shadow-lg";
 
   const baseClasses = css(
     "relative w-full text-left p-3 rounded-xl border transition-all duration-150 flex flex-col gap-1",
@@ -184,31 +180,21 @@ const OptionButton = ({
   );
 };
 
+/* Main MakeWeb component */
 const MakeWeb = () => {
   const [projectType, setProjectType] = useState("");
   const [budget, setBudget] = useState("");
   const [delivery, setDelivery] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const theme = typeof useTheme === "function" ? useTheme() : undefined;
   const isDarkMode = theme?.isDarkMode ?? false;
 
   const PROJECTS = useMemo(
     () => ({
-      website: {
-        label: "Website",
-        base: 145,
-        hint: "Marketing or business site",
-      },
-      reactnative: {
-        label: "React Native",
-        base: 270,
-        hint: "Cross-platform mobile app",
-      },
-      ecommerce: {
-        label: "E-commerce",
-        base: 215,
-        hint: "Online store with product pages",
-      },
+      website: { label: "Website", base: 145, hint: "Marketing or business site" },
+      reactnative: { label: "React Native", base: 270, hint: "Cross-platform mobile app" },
+      ecommerce: { label: "E-commerce", base: 215, hint: "Online store with product pages" },
       portfolio: { label: "Portfolio", base: 70, hint: "Simple personal site" },
       api: { label: "API + Backend", base: 125, hint: "Server / API work" },
     }),
@@ -216,27 +202,9 @@ const MakeWeb = () => {
   );
 
   const BUDGET_OPTIONS = [
-    {
-      value: "low",
-      label: "Low",
-      add: 0,
-      variant: "success",
-      hint: "Cost-conscious",
-    },
-    {
-      value: "medium",
-      label: "Medium",
-      add: 50,
-      variant: "mid",
-      hint: "Good balance",
-    },
-    {
-      value: "high",
-      label: "High",
-      add: 100,
-      variant: "warn",
-      hint: "Premium expectations",
-    },
+    { value: "low", label: "Low", add: 0, variant: "success", hint: "Cost-conscious" },
+    { value: "medium", label: "Medium", add: 50, variant: "mid", hint: "Good balance" },
+    { value: "high", label: "High", add: 100, variant: "warn", hint: "Premium expectations" },
   ];
 
   const DELIVERY_OPTIONS = [
@@ -253,20 +221,10 @@ const MakeWeb = () => {
     const budgetObj = BUDGET_OPTIONS.find((b) => b.value === budget);
     const deliveryObj = DELIVERY_OPTIONS.find((d) => d.value === delivery);
     const budgetAdd = budgetObj ? Math.max(0, Number(budgetObj.add || 0)) : 0;
-    const deliveryAdd = deliveryObj
-      ? Math.max(0, Number(deliveryObj.add || 0))
-      : 0;
+    const deliveryAdd = deliveryObj ? Math.max(0, Number(deliveryObj.add || 0)) : 0;
     let total = base + budgetAdd + deliveryAdd;
     total = Math.max(0, Math.round(total));
-    return {
-      total,
-      base,
-      budgetAdd,
-      deliveryAdd,
-      valid: true,
-      budgetLabel: budgetObj ? budgetObj.label : null,
-      deliveryLabel: deliveryObj ? deliveryObj.label : null,
-    };
+    return { total, base, budgetAdd, deliveryAdd, valid: true };
   }, [projectType, budget, delivery, PROJECTS]);
 
   const resetAll = () => {
@@ -287,13 +245,11 @@ const MakeWeb = () => {
     const p = priceBreakdown.total;
     const greenLimit = base * 1.4;
     const yellowLimit = base * 1.8;
-    if (p <= greenLimit)
-      return { label: "Budget-Friendly", variant: "success" };
+    if (p <= greenLimit) return { label: "Budget-Friendly", variant: "success" };
     if (p <= yellowLimit) return { label: "Mid-Range", variant: "mid" };
     return { label: "Premium", variant: "warn" };
   }, [priceBreakdown]);
 
-  // stronger fallback gradient for old Safari (keeps contrast high)
   const asideFallbackBg =
     isOldiOSSafari && priceBreakdown.valid
       ? priceStatus.variant === "success"
@@ -302,7 +258,6 @@ const MakeWeb = () => {
         ? { background: "linear-gradient(135deg,#b45309,#d97706)" }
         : { background: "linear-gradient(135deg,#be185d,#fb7185)" }
       : undefined;
-  const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
     const parts = [];
@@ -311,13 +266,11 @@ const MakeWeb = () => {
     if (delivery) parts.push(`Delivery: ${delivery}`);
     parts.push(`Estimate: ${currency.format(priceBreakdown.total)}`);
     const text = `Project Estimate — ${parts.join(" • ")}`;
-
     navigator?.clipboard?.writeText?.(text);
-
-    // Show toast
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000); // hide after 2 seconds
+    setTimeout(() => setCopied(false), 2000);
   };
+
   return (
     <section
       aria-labelledby="make-project-title"
@@ -333,35 +286,17 @@ const MakeWeb = () => {
         >
           Make Your Project Budget
         </h1>
-        <p
-          className="mt-2 max-w-2xl mx-auto text-sm"
-          style={{ color: isDarkMode ? undefined : "#374151" }}
-        >
+        <p className="mt-2 max-w-2xl mx-auto text-sm" style={{ color: isDarkMode ? undefined : "#374151" }}>
           Pick your project type, budget tier and delivery speed to get an
           instant, transparent estimate — including a clear price breakdown.
         </p>
       </header>
 
       <main className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-        <div
-          className={css(
-            "lg:col-span-2 border rounded-2xl p-5 space-y-6 shadow-sm",
-            isDarkMode ? "bg-gray-800" : "bg-gray-50"
-          )}
-        >
-          <fieldset className="space-y-3" aria-label="Project type">
-<<<<<<< HEAD
-            <legend className="text-sm uppercase text-white font-medium opacity-85">
-=======
-            <legend
-              className={css(
-                "text-sm uppercase font-medium",
-                isDarkMode ? "text-white" : "text-gray-700"
-              )}
-            >
->>>>>>> bf61c50fb8cd668dc364fa6e6e8d991e1f8d48bb
-              Project Type
-            </legend>
+        {/* LEFT: OPTIONS */}
+        <div className={css("lg:col-span-2 border rounded-2xl p-5 space-y-6 shadow-sm", isDarkMode ? "bg-gray-800" : "bg-gray-50")}>
+          <fieldset className="space-y-3">
+            <legend className={css("text-sm uppercase font-medium", isDarkMode ? "text-white" : "text-gray-700")}>Project Type</legend>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {Object.entries(PROJECTS).map(([key, { label, hint }]) => (
                 <OptionButton
@@ -370,7 +305,7 @@ const MakeWeb = () => {
                   label={label}
                   subtitle={hint}
                   selected={projectType === key}
-                  onSelect={(id) => setProjectType(id)}
+                  onSelect={setProjectType}
                   variant="neutral"
                   isDarkMode={isDarkMode}
                 />
@@ -379,18 +314,7 @@ const MakeWeb = () => {
           </fieldset>
 
           <fieldset className="space-y-3">
-<<<<<<< HEAD
-            <legend className="text-sm text-white uppercase font-medium opacity-85">
-=======
-            <legend
-              className={css(
-                "text-sm uppercase font-medium",
-                isDarkMode ? "text-white" : "text-gray-700"
-              )}
-            >
->>>>>>> bf61c50fb8cd668dc364fa6e6e8d991e1f8d48bb
-              Budget Range
-            </legend>
+            <legend className={css("text-sm uppercase font-medium", isDarkMode ? "text-white" : "text-gray-700")}>Budget Range</legend>
             <div className="grid grid-cols-3 gap-3">
               {BUDGET_OPTIONS.map((opt) => (
                 <OptionButton
@@ -399,39 +323,16 @@ const MakeWeb = () => {
                   label={opt.label}
                   subtitle={opt.hint}
                   selected={budget === opt.value}
-                  onSelect={(id) => setBudget(id)}
+                  onSelect={setBudget}
                   variant={opt.variant}
                   isDarkMode={isDarkMode}
-                  // Force stronger light mode colors
-                  lightModeOverride={
-                    {
-                      success: {
-                        bg: "bg-emerald-300",
-                        text: "text-emerald-900",
-                      },
-                      mid: { bg: "bg-amber-300", text: "text-amber-900" },
-                      warn: { bg: "bg-rose-300", text: "text-rose-900" },
-                      neutral: { bg: "bg-gray-200", text: "text-gray-900" },
-                    }[opt.variant]
-                  }
                 />
               ))}
             </div>
           </fieldset>
 
           <fieldset className="space-y-3">
-<<<<<<< HEAD
-            <legend className="text-sm uppercase text-white font-medium opacity-85">
-=======
-            <legend
-              className={css(
-                "text-sm uppercase font-medium",
-                isDarkMode ? "text-white" : "text-gray-700"
-              )}
-            >
->>>>>>> bf61c50fb8cd668dc364fa6e6e8d991e1f8d48bb
-              Delivery Time
-            </legend>
+            <legend className={css("text-sm uppercase font-medium", isDarkMode ? "text-white" : "text-gray-700")}>Delivery Time</legend>
             <div className="grid grid-cols-3 gap-3">
               {DELIVERY_OPTIONS.map((opt) => (
                 <OptionButton
@@ -440,7 +341,7 @@ const MakeWeb = () => {
                   label={opt.label}
                   subtitle={opt.hint}
                   selected={delivery === opt.value}
-                  onSelect={(id) => setDelivery(id)}
+                  onSelect={setDelivery}
                   variant="neutral"
                   isDarkMode={isDarkMode}
                 />
@@ -452,17 +353,14 @@ const MakeWeb = () => {
             <button
               type="button"
               onClick={resetAll}
-<<<<<<< HEAD
-              className="py-2 px-4 rounded-md border text-white text-sm bg-transparent hover:bg-gray-50 dark:hover:bg-gray-700 transition"
-=======
-              className="py-2 px-4 rounded-md border text-sm bg-transparent hover:bg-gray-100 transition"
->>>>>>> bf61c50fb8cd668dc364fa6e6e8d991e1f8d48bb
+              className="py-2 px-4 rounded-md border text-sm bg-transparent hover:bg-gray-100 dark:hover:bg-gray-700 transition"
             >
               Reset
             </button>
           </div>
         </div>
 
+        {/* RIGHT: ESTIMATE */}
         <aside
           className={css(
             "rounded-2xl p-5 shadow-xl flex flex-col gap-4 justify-between",
@@ -481,34 +379,22 @@ const MakeWeb = () => {
         >
           <div>
             <h2 className="text-lg font-bold">Estimated Price</h2>
-
             {!priceBreakdown.valid ? (
-              <p className="mt-2 text-sm">
-                Select a project type to see an estimate.
-              </p>
+              <p className="mt-2 text-sm">Select a project type to see an estimate.</p>
             ) : (
               <>
-                <p className="mt-3 text-3xl font-extrabold">
-                  {currency.format(priceBreakdown.total)}
-                </p>
-
+                <p className="mt-3 text-3xl font-extrabold">{currency.format(priceBreakdown.total)}</p>
                 <div className="mt-4 bg-white/10 rounded-lg p-3 text-sm">
                   <div className="flex justify-between">
-                    <span style={{ color: isDarkMode ? undefined : "#ffffff" }}>
-                      Base ({PROJECTS[projectType]?.label})
-                    </span>
+                    <span style={{ color: isDarkMode ? undefined : "#ffffff" }}>Base ({PROJECTS[projectType]?.label})</span>
                     <span>{currency.format(priceBreakdown.base)}</span>
                   </div>
                   <div className="flex justify-between mt-2">
-                    <span style={{ color: isDarkMode ? undefined : "#ffffff" }}>
-                      Budget adjustment
-                    </span>
+                    <span style={{ color: isDarkMode ? undefined : "#ffffff" }}>Budget adjustment</span>
                     <span>{currency.format(priceBreakdown.budgetAdd)}</span>
                   </div>
                   <div className="flex justify-between mt-2">
-                    <span style={{ color: isDarkMode ? undefined : "#ffffff" }}>
-                      Delivery adjustment
-                    </span>
+                    <span style={{ color: isDarkMode ? undefined : "#ffffff" }}>Delivery adjustment</span>
                     <span>{currency.format(priceBreakdown.deliveryAdd)}</span>
                   </div>
                 </div>
@@ -520,23 +406,12 @@ const MakeWeb = () => {
             <div className="flex items-center justify-between text-sm">
               <div className="flex items-center gap-3">
                 <span className="font-medium">Status</span>
-                <TrafficLight
-                  variant={priceStatus.variant}
-                  activeLabel={priceStatus.label}
-                />
+                <TrafficLight variant={priceStatus.variant} activeLabel={priceStatus.label} />
               </div>
-
               <span
-                className={css(
-                  "inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase"
-                )}
+                className={css("inline-block px-3 py-1 rounded-full text-xs font-semibold uppercase")}
                 style={
-                  isOldiOSSafari
-                    ? {
-                        backgroundColor: "rgba(255,255,255,0.18)",
-                        color: isDarkMode ? "#fff" : "#000",
-                      }
-                    : undefined
+                  isOldiOSSafari ? { backgroundColor: "rgba(255,255,255,0.18)", color: isDarkMode ? "#fff" : "#000" } : undefined
                 }
               >
                 {priceStatus.label}
@@ -546,9 +421,7 @@ const MakeWeb = () => {
             <div className="flex gap-2">
               <button
                 type="button"
-                onClick={() => {
-                  window?.open?.("/Contact", "_blank");
-                }}
+                onClick={() => window?.open?.("/Contact", "_blank")}
                 disabled={!priceBreakdown.valid}
                 className={css(
                   "flex-1 py-2 rounded-md font-semibold focus:outline-none focus:ring-2 focus:ring-offset-2 transition",
@@ -582,9 +455,7 @@ const MakeWeb = () => {
       </main>
 
       <footer className="mt-4 text-center text-xs opacity-80">
-        * This is only an estimate — final pricing depends on precise feature
-        list, integrations and scope. For a firm quote, contact us with feature
-        details.
+        * This is only an estimate — final pricing depends on precise feature list, integrations and scope. For a firm quote, contact us with feature details.
       </footer>
     </section>
   );

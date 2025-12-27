@@ -30,7 +30,6 @@ const CORE_STACK = [
 ];
 
 /* Capabilities – tools appear ONCE, in context */
-<<<<<<< HEAD
 const CAPABILITIES = [
   {
     title: "Frontend Web Apps",
@@ -100,8 +99,6 @@ const CAPABILITIES = [
     ],
   },
 ];
-=======
->>>>>>> bf61c50fb8cd668dc364fa6e6e8d991e1f8d48bb
 
 export default function Skills() {
   const { isDarkMode } = useTheme?.() ?? { isDarkMode: false };
