@@ -30,6 +30,7 @@ const CORE_STACK = [
 ];
 
 /* Capabilities – tools appear ONCE, in context */
+<<<<<<< HEAD
 const CAPABILITIES = [
   {
     title: "Frontend Web Apps",
@@ -99,9 +100,88 @@ const CAPABILITIES = [
     ],
   },
 ];
+=======
+>>>>>>> bf61c50fb8cd668dc364fa6e6e8d991e1f8d48bb
 
 export default function Skills() {
   const { isDarkMode } = useTheme?.() ?? { isDarkMode: false };
+  const CAPABILITIES = [
+    {
+      title: "Frontend Web Apps",
+      desc: "Responsive, accessible interfaces with modern React patterns.",
+      tools: [
+        { name: "React", icon: <FaReact className="text-cyan-400" /> },
+        {
+          name: "Next.js",
+          icon: <SiNextdotjs className="text-neutral-800 dark:text-black" />,
+        },
+        {
+          name: "Tailwind CSS",
+          icon: <SiTailwindcss className="text-sky-500" />,
+        },
+        {
+          name: "JavaScript",
+          icon: <SiJavascript className="text-yellow-400" />,
+        },
+      ],
+    },
+    {
+      title: "Backend APIs",
+      desc: "REST APIs and application backends.",
+      tools: [
+        { name: "Node.js", icon: <FaNodeJs className="text-green-600" /> },
+        { name: "Express", icon: <SiExpress className="text-gray-700" /> },
+      ],
+    },
+    {
+      title: "Databases",
+      desc: "Flexible data models for web apps.",
+      tools: [
+        { name: "MongoDB", icon: <SiMongodb className="text-green-700" /> },
+      ],
+    },
+    {
+      title: "Mobile Apps",
+      desc: "Cross-platform apps for Android and iOS.",
+      tools: [
+        { name: "React Native", icon: <FaReact className="text-cyan-500" /> },
+      ],
+    },
+    {
+      title: "DevOps & Systems",
+      desc: "Deploying and running applications.",
+      tools: [
+        {
+          name: "Linux",
+          icon: (
+            <FaLinux
+              className={`${isDarkMode ? "text-black" : "text-gray-900"}`}
+            />
+          ),
+        },
+      ],
+    },
+    {
+      title: "ML & Experiments",
+      desc: "Exploration and prototyping with data.",
+      tools: [
+        { name: "Python", icon: <FaPython className="text-blue-700" /> },
+        {
+          name: "Scikit-Learn",
+          icon: <SiScikitlearn className="text-orange-400" />,
+        },
+        { name: "PyTorch", icon: <SiPytorch className="text-orange-400" /> },
+      ],
+    },
+    {
+      title: "Systems / Low-level",
+      desc: "Performance-oriented and systems work.",
+      tools: [
+        { name: "C", icon: <SiC className="text-blue-800" /> },
+        { name: "C++", icon: <SiCplusplus className="text-blue-600" /> },
+      ],
+    },
+  ];
 
   // Theme classes (from your example)
   const cardBg = isDarkMode ? "bg-gray-800" : "bg-gray-100";
