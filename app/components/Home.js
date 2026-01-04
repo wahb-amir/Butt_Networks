@@ -253,7 +253,7 @@ export default function Hero() {
               </Link>
 
               <Link
-                href="/contact"
+                href="/Contact"
                 className={`inline-flex items-center justify-center px-5 py-3 rounded-xl border ${
                   isDarkMode
                     ? "border-gray-700 text-white"

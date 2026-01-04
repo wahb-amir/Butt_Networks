@@ -15,7 +15,7 @@ const CLIENT_QUOTE = `${CLIENT_PORTAL}#request-quote`;
 
 const teamGitHub = [
   { name: "Wahb Amir", url: "https://github.com/wahb-amir" },
-  { name: "Shahanwaz", url: "https://github.com/ShahanwazSaddam144" },
+  { name: "shahnawaz", url: "https://github.com/ShahanwazSaddam144" },
 ];
 
 const Contact = () => {
