@@ -196,31 +196,36 @@ export const projects = [
     ],
     priority: 8,
   },
-  //   {
-  //     id: "note-pad",
-  //     heading: "Note Pad",
-  //     description:
-  //       "Built with Python and Tkinter, this lightweight desktop notepad is packaged as a Windows executable, opens quickly, and supports simple formatting.",
-  //     demoLink: "/notepad.exe",
-  //     githubLink: null,
-  //     images: ["/project.png", "/project.png"],
-  //     tech: ["Python", "Tkinter", "PyInstaller"],
-  //     authors: [
-  //       {
-  //         name: "Shahnawaz Butt",
-  //         role: "Logic & Packaging",
-  //         portfolio: "https://shahnawaz.buttnetworks.com",
-  //       },
-  //     ],
-  //     startDate: null,
-  //     endDate: null,
-  //     status: "completed",
-  //     highlights: [
-  //       "Basic rich-text formatting and save/export options",
-  //       "Very lightweight and fast startup",
-  //       "Packaged as a portable Windows .exe",
-  //     ],
-  //     type: "non-web",
-  //     priority: 2,
-  //   },
+{
+    id: "Admin-Dashobard",
+    heading: "Admin-Dashboard",
+    description:
+     "A powerful and secure admin dashboard designed to manage users, content, and system data efficiently, featuring role-based access control, real-time analytics, and centralized tools for monitoring and maintaining application performance.",
+    demoLink: "https://admin-dashboard.buttnetworks.com/",
+    githubLink: "https://github.com/ShahanwazSaddam144/admin-panel",
+    githubLink: "https://github.com/ShahanwazSaddam144/admin-panel",
+
+    images: [
+      "/projects/Dashboard/Home.png",
+      "/projects/Dashboard/Login.png",
+      "/projects/DashBoard/Dashboard.png",
+    ],
+    tech: ["Next.js", "Node.js", "MongoDB", "Express", "Tailwind CSS"],
+    authors: [
+      {
+        name: "Shahnawaz Butt",
+        role: "Full Stack",
+        portfolio: "https://shahnawaz.buttnetworks.com",
+      },
+    ],
+    startDate: "December 30, 2025",
+    endDate: "January 4, 2026",
+    status: "completed",
+highlights: [
+  "Role-based admin access with secure authentication",
+  "Real-time dashboard analytics and activity monitoring",
+  "User, content, and system management from a centralized panel",
+],
+    priority: 6,
+  },
 ];
