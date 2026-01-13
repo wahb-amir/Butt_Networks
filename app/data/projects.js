@@ -127,7 +127,7 @@ export const projects = [
       features:
         "Quote requests, email alerts, real-time chat, progress timeline, role-based auth",
     },
-    priority: 9,
+    priority: 10,
   },
 
   //   {
@@ -194,13 +194,13 @@ export const projects = [
       "JWT authentication and cart persistence",
       "Category browsing and admin-ready product management",
     ],
-    priority: 8,
+    priority: 7,
   },
-{
-    id: "Admin-Dashobard",
+  {
+    id: "Admin-Dashboard",
     heading: "Admin-Dashboard",
     description:
-     "A powerful and secure admin dashboard designed to manage users, content, and system data efficiently, featuring role-based access control, real-time analytics, and centralized tools for monitoring and maintaining application performance.",
+      "A powerful and secure admin dashboard designed to manage users, content, and system data efficiently, featuring role-based access control, real-time analytics, and centralized tools for monitoring and maintaining application performance.",
     demoLink: "https://admin-dashboard.buttnetworks.com/",
     githubLink: "https://github.com/ShahanwazSaddam144/admin-panel",
     githubLink: "https://github.com/ShahanwazSaddam144/admin-panel",
@@ -221,11 +221,44 @@ export const projects = [
     startDate: "December 30, 2025",
     endDate: "January 4, 2026",
     status: "completed",
-highlights: [
-  "Role-based admin access with secure authentication",
-  "Real-time dashboard analytics and activity monitoring",
-  "User, content, and system management from a centralized panel",
-],
-    priority: 6,
+    highlights: [
+      "Role-based admin access with secure authentication",
+      "Real-time dashboard analytics and activity monitoring",
+      "User, content, and system management from a centralized panel",
+    ],
+    priority: 8,
+  },
+
+  {
+    id: "Key&Chains",
+    heading: "Key and Chains",
+    description:
+      "A powerful and secure e-commerce store designed to manage products, content, and system data efficiently, featuring role-based access control, real-time analytics, and centralized tools for monitoring and maintaining application performance.",
+    demoLink: "https://admin-dashboard.buttnetworks.com/",
+    githubLink: "https://github.com/ShahanwazSaddam144/Key---Chains",
+    githubLink: "https://github.com/ShahanwazSaddam144/Key---Chains",
+
+    images: [
+      "/projects/KeyChains/Home.png",
+      "/projects/KeyChains/Home.png",
+      "/projects/KeyChains/Home.png",
+    ],
+    tech: ["Next.js", "Node.js", "MongoDB", "Express", "Tailwind CSS"],
+    authors: [
+      {
+        name: "Shahnawaz Butt",
+        role: "Full Stack",
+        portfolio: "https://shahnawaz.buttnetworks.com",
+      },
+    ],
+    startDate: "December 8, 2025",
+    endDate: "January 13, 2026",
+    status: "completed",
+    highlights: [
+      "Role-based e-commerce store with secure authentication",
+      "Real-time products, customer supports and user interface",
+      "User, content, and system management from a centralized panel",
+    ],
+    priority: 9,
   },
 ];
